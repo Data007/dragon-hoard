@@ -14,7 +14,12 @@ function HelloController($scope, $http) {
       });
   };
 
-  $scope.authenticate = function() {
+  $scope.logout = function() {
+    $scope.session.token = '';
+    $scope.session.authenticated = false;
+  };
+
+  $scope.login = function() {
     $http.get('/angular_tests/authenticate')
       .success(function(data, status, handlers, config) {
         $scope.session = data;

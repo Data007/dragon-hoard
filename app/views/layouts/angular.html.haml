@@ -11,7 +11,8 @@
 
       .authenticated
 
-        %a{:'ng-click' => 'authenticate()'} Authenticate
+        %a{:'ng-show' => '!session.authenticated', :'ng-click' => 'login()'} Login
+        %a{:'ng-show' => 'session.authenticated', :'ng-click' => 'logout()'} Logout
         %h3 Authenticated? {{session.authenticated}}
         %h3 Token: {{session.token}}
 
