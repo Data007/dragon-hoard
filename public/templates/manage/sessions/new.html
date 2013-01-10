@@ -1,5 +1,5 @@
-<form action='/manage/session' method='post'>
+<form ng-submit='createSession ()' ng-model='authorize'>
   <label for='user-pin'>Employee ID</label>
-  <input type='number' id='user-pin' name='pin' />
+  <input type='text' id='user-pin' name='pin' ng-model='session.pin' ng-required />
   <input type='submit' value='Enter' />
 </form>

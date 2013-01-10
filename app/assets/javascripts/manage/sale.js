@@ -1,2 +1,3 @@
-function ManageSalesController ( $scope, $http, $routeParams ) {
+function ManageSalesController ( $scope, $http, $routeParams, $location ) {
+  $scope.forceSession ();
 }
