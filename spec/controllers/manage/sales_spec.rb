@@ -7,23 +7,16 @@ require 'spec_helper'
 
 describe Manage::SalesController do
   it 'denies me without authorization' do
-    get :index, format: :js
+    get :index
     response.code.should == '401'
   end
 
-  it 'authorizes with a valid pin' do
+  it 'authorizes with a valid token' do
     user    = FactoryGirl.create :user
     session = ApiSession.authorize(user.pin)
 
-    get :index, format: :js, token: session.token
+    get :index, token: session.token
     response.code.should == '200'
-
-    json = JSON.parse(response.body)
-    json['user'].should be
-    json['user']['first_name'].should be
-    json['user']['last_name'].should be
-    json['user']['email'].should be
-    json['token'].should be
   end
 
   context 'authorized' do
@@ -33,7 +26,14 @@ describe Manage::SalesController do
     end
 
     it 'creates a new sale'do
-      # TODO: post sale creation stuff
+      post :create, token: @session.token, order: {staging_type: 'sale'}
+      response.code.should == '200'
+      
+      json = JSON.parse(response.body)
+      json['order'].should be
+      json['order']['_id'].should be
+      json['order']['staging_type'].should == 'sale'
+      json['order']['location'].should == 'instore'
     end
 
     context 'with sales' do

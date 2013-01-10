@@ -13,28 +13,9 @@ private
   end
 
   def force_access_pin
-    if params[:format] == 'js'
-      session = ApiSession.where(token: params[:token]).first
-      if session
-        render json: {
-          user: {
-            first_name: session.user.first_name,
-            last_name: session.user.first_name,
-            full_name: session.user.full_name,
-            email: session.user.email,
-            id: session.user.id
-          },
-          token: session.token,
-          created_at: session.created_at
-        }.to_json
-      else
-        render json: {message: 'Unauthorized. You must provide a valid pin to access this feature.'}.to_json, status: 401
-      end
-    else
-      unless manage_user
-        session[:redirect_to] = request.url
-        redirect_to [:manage, :authorize]
-      end
+    session = ApiSession.where(token: params[:token]).first
+    unless session
+      render json: {message: 'Unauthorized. You must provide a valid token to access this feature.'}.to_json, status: 401
     end
   end
 end
