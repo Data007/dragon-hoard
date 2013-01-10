@@ -8,14 +8,14 @@ DragonHoardRails32::Application.routes.draw do
   end
 
   namespace :manage do
-    resources :sales, controller: 'orders'
+    resources :sales
     resource  :session
 
     match 'authorize' => 'sessions#new', as: :authorize
-    get :home, as: :manage_root
+    get :home
   end
 
-  match 'manage'      => redirect('/manage/home')
+  match 'manage' => 'manage#home'
 
   resources :items
   resources :collections, only: [:index, :show]

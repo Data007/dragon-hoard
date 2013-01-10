@@ -1,2 +1,2 @@
-function SaleController ( $scope, $http ) {
+function ManageSalesController ( $scope, $http, $routeParams ) {
 }

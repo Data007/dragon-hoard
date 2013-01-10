@@ -19,7 +19,6 @@ module DragonHoardRails32
 
       g.view_specs          false
       g.helper_specs        false
-      g.controller_specs    false
 
       g.javascripts         false
       g.stylesheets         false
@@ -35,6 +34,7 @@ module DragonHoardRails32
     config.active_support.escape_html_entities_in_json = true
     config.assets.enabled = true
     config.assets.version = '1.0'
+    config.assets.paths << Rails.root.join('app', 'assets', 'templates')
   end
 end
 

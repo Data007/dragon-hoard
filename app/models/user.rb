@@ -27,6 +27,7 @@ class User
   has_many    :orders
   embeds_many :phones
   has_many    :credit_cards
+  has_many    :api_sessions
 
   has_one     :cart
 

@@ -48,7 +48,7 @@ gem 'countries'
 gem 'active_shipping'
 gem 'activemerchant'
 
-
+gem 'digest-sha3'
 
 group :production do
   gem 'newrelic_rpm', '3.4.1'

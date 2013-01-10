@@ -1,2 +1,3 @@
-function ManageDashboardController ( $scope, $http ) {
+function ManageDashboardController ( $scope, $http, $routeParams ) {
+
 }
