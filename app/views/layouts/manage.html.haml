@@ -8,10 +8,13 @@
     %title Manage #{yield :page_title}
 
     = csrf_meta_tags
-    = stylesheet_link_tag 'manage', media: 'all'
+    %style(src='/stylesheets/manage/screens.css' media='all' type='text/css')
 
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js', media: 'all'
-    = javascript_include_tag 'manage', media: 'all'
+    %script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js' media='all' type='text/javascript')
+    %script(src='/javascripts/manage/manage.js' media='all' type='text/javascript')
+    %script(src='/javascripts/manage/dashboard.js' media='all' type='text/javascript')
+    %script(src='/javascripts/manage/sale.js' media='all' type='text/javascript')
+    %script(src='/javascripts/manage/session.js' media='all' type='text/javascript')
 
   %body{:'ng-controller' => 'ManageDashboardController'}
     %header#header
