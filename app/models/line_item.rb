@@ -42,12 +42,13 @@ class LineItem
   end
 
   def validate_price
-    unless is_quick_item?
-      if price.blank?
-        self.price = item.present? ? item.price : 0
+    begin
+      unless is_quick_item?
+        self.price = item.present? ? item.price : 0 if price.blank?
       end
+    rescue
+      self.price = 0 if price.blank?
     end
-
     self.price = launder_money(self.price).to_f
   end
 

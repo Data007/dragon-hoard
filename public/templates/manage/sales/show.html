@@ -1,1 +1,37 @@
 <h1>Order {{id}}</h1>
+<!-- <button ng-click='addLineItem ()'>Add a Line Item</button> -->
+<h3>Add a quick item</h3>
+<form ng-submit='createLineItem ()' ng-model='lineItem' ng-controller='ManageSalesController'>
+  <label>Description</label>
+  <input type='text' ng-model='lineItem.description' />
+  <label>Price</label>
+  <input type='text' ng-model='lineItem.price' />
+  <label>Quantity</label>
+  <input type='text' ng-model='lineItem.quantity' />
+  <input type='submit' value='Add' />
+</form>
+
+<table ng-controller='ManageSalesController'>
+  <thead>
+    <th>Line Item Id</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat='lineItem in currentOrder.lineItems'>
+      <td>{{lineItem.pretty_id}}</td>
+      <td>{{lineItem.description}}</td>
+      <td>{{lineItem.price | currency}}</td>
+      <td>{{lineItem.quantity}}</td>
+      <td>{{lineItem.total | currency}}</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td colspan='3'>Total</td>
+      <td><strong>{{currentOrder.total | currency}}</strong></td>
+    </tr>
+  </tbody>
+</table>

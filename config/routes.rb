@@ -8,10 +8,11 @@ DragonHoardRails32::Application.routes.draw do
   end
 
   namespace :manage do
-    resources :sales
-    resource  :session
+    resources :sales do
+      resources :line_items, controller: 'sales/line_items'
+    end
 
-    match 'authorize' => 'sessions#new', as: :authorize
+    resource  :session
     get :home
   end
 

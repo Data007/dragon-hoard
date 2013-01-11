@@ -3,6 +3,6 @@ class Manage::SalesController < ManageController
 
   def create
     order = Order.create params[:order]
-    render json: order, status: order.created_at? ? '200' : '403'
+    render json: order.to_json(include: [:line_items]), status: order.created_at? ? '200' : '403'
   end
 end
