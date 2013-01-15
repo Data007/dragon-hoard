@@ -13,6 +13,7 @@ gem 'fedex'
 gem 'coffee-filter'
 gem 'haml_coffee_assets'
 gem 'execjs'
+gem 'sprockets-commonjs'
 
 # http://collectiveidea.com/blog/archives/2010/11/29/ssl-with-rails/
 gem 'rack-ssl'

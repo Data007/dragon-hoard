@@ -5,19 +5,12 @@
     %meta{:'http-equiv' => "X-UA-Compatible", content: "IE=Edge,chrome=1"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     %link{rel: "image_src", href: "#{yield :image_src}"}
-    %title Manage #{yield :page_title}
+    %title Manage
 
     = csrf_meta_tags
-    %style(src='/stylesheets/manage/screens.css' media='all' type='text/css')
 
-    %script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js' media='all' type='text/javascript')
-    %script(src='/javascripts/manage/manage.js' media='all' type='text/javascript')
-    %script(src='/javascripts/manage/dashboard.js' media='all' type='text/javascript')
-    %script(src='/javascripts/manage/sale.js' media='all' type='text/javascript')
-    %script(src='/javascripts/manage/session.js' media='all' type='text/javascript')
-
-  %body{:'ng-controller' => 'ManageDashboardController'}
-    %header#header
+  %body
+    #header
       = link_to image_tag('manage-logo-white.png'), root_path, class: 'brand'
       %form
         %input{type: 'text', placeholder: 'Search'}
@@ -27,17 +20,20 @@
         %li= link_to 'Home', '#/home', :'ng-click' => 'clearSession ()'
         %li= link_to 'Sale', '#/sales/new'
 
-    %section#main
-      %nav#left-sidebar
+    .selector click me!
+    #main
+      #left-sidebar
         left sidebar
-      %article#content
+      #content
         - if flash.present?
           %section
             - flash.each do |(key, value)|
               = content_tag :article, raw(value), class: 'message', id: "#{key}-message"
-        %div.message{id: 'error-message'}
-          {{flash.error}}
-        %section
-          .angular-view(ng-view='')
-      %aside#right-sidebar
+        #body
+          = yield
+      #right-sidebar
         right sidebar
+
+    = javascript_include_tag 'manage'
+    :javascript
+      var app = new DragonsBreath;
