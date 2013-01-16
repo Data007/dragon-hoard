@@ -11,4 +11,11 @@ private
     return nil unless session[:manage_user_id]
     @manage_user ||= User.find(session[:manage_user_id])
   end
+
+  def force_pin
+    unless manage_user
+      session[:redirect_to] = request.fullpath
+      redirect_to [:new, :manage, :session] 
+    end
+  end
 end

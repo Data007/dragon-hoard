@@ -312,7 +312,7 @@ DEPENDENCIES
   airbrake
   aws-sdk
   braintree
-  capybara
+  capybara (= 1.1.2)
   coffee-filter
   coffee-rails (~> 3.2.1)
   compass

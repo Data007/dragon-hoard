@@ -13,7 +13,6 @@ DragonHoardRails32::Application.routes.draw do
     end
 
     resource  :session
-    get :home
   end
 
   match 'manage' => 'manage#home'
