@@ -39,7 +39,18 @@ describe Manage::Sales::LineItemsController do
         )
       }
 
-      it 'updates a line_item'
+      it 'updates a line_item' do
+        @sale.line_items.find(line_item.id).price.should == item.price
+
+        post :update, sale_id: @sale.id, id: line_item.id, line_item: {
+          price: 3545650.56
+        }
+
+        @sale.reload
+        @sale.line_items.find(line_item.id).price.should_not == item.price
+        @sale.line_items.find(line_item.id).price.should == 3545650.56
+      end
+
       it 'refunds a line_item'
 
       it 'removes a line_item' do
