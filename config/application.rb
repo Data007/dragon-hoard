@@ -34,7 +34,7 @@ module DragonHoardRails32
     config.active_support.escape_html_entities_in_json = true
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.precompile += %w(manage.js, manage.css)
+    config.assets.precompile += %w(manage.js manage.css)
   end
 end
 
