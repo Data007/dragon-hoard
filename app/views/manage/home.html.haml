@@ -7,17 +7,13 @@
   .tile-content
     %img(src="http://www.kitconet.com/charts/metals/silver/t24_ag_en_usoz_6.gif?random=#{Time.now.to_i}" alt="24 hr silver chart")
 
-%a.tile.image(href='http://www.kitco.com/charts/popup/au24hr3day.html')
-  .tile-content
-    %img(src="http://www.kitco.com/images/live/t24_au_en_usoz_home.gif?random=#{Time.now.to_i}" alt="24 hr gold chart")
-
 .tile.icon
   .tile-content
     %h1.icon-large.icon-calendar
   .brand
     .name 2:30 pm
 
-%a.tile.icon{href: new_manage_sale_path}
+%a.tile.icon.bg-color-green{href: new_manage_sale_path}
   .tile-content
     %h1.icon-large.icon-tag
   .brand
