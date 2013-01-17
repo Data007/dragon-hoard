@@ -4,7 +4,7 @@ class Manage::Sales::LineItemsController < Manage::SalesController
   before_filter :find_line_item, except: [:new, :create]
 
   def create
-    line_item = @sale.line_items.create(params[:line_item])
+    line_item = @order.line_items.create(params[:line_item])
     render json: line_item.to_json
   end
 
@@ -20,6 +20,6 @@ class Manage::Sales::LineItemsController < Manage::SalesController
 
 private
   def find_line_item
-    @line_item = @sale.line_items.find(params[:id])
+    @line_item = @order.line_items.find(params[:id])
   end
 end
