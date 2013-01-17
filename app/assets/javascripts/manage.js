@@ -1,2 +1,2 @@
 //= require jquery
-//= require_tree ./dragonsbreath
+//= require_tree ./manage

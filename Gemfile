@@ -10,6 +10,7 @@ group :assets do
 end
 
 gem 'fedex'
+gem 'kitco'
 gem 'coffee-filter'
 gem 'haml_coffee_assets'
 gem 'execjs'
