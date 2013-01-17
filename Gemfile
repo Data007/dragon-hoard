@@ -19,6 +19,7 @@ gem 'sprockets-commonjs'
 gem 'rack-ssl'
 
 gem 'jquery-rails'
+gem 'select2-rails'
 
 gem 'haml'
 gem 'haml-rails'

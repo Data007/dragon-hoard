@@ -1,1 +1,33 @@
 %h1 Order #{@sale.id}
+
+%table#line-items-view.striped
+  %thead
+    %tr
+      %th Item Id
+      %th Description
+      %th Price
+      %th Amount
+      %th Total
+      %th &nbsp;
+  %tbody#line-items-form
+    %tr
+      %td
+        .input-control.text
+          %input#line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...')
+          %button.helper
+      %td
+        .input-control.text
+          %textarea#line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')
+          %button.helper
+      %td
+        .input-control.text
+          %input#line-item-price(type='text' name='line_item[price]' placeholder='3,500.00')
+          %button.helper
+      %td
+        .input-control.text
+          %input#line-item-amount(type='text' name='line_item[quantity]' placeholder='1')
+          %button.helper
+      %td
+        %span#line-item-total
+      %td#line-item-actions
+  
