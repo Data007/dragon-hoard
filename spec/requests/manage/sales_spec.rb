@@ -21,16 +21,16 @@ describe 'Managing Sales' do
         page.should have_content('Unauthorized')
       end
 
-      it 'finds employee with a valid pin' do
-        fill_in 'Employee ID', with: employee.pin
-        click_button 'Enter'
+      context 'with a valid pin' do
+        before do
+          fill_in 'Employee ID', with: employee.pin
+          click_button 'Enter'
+        end
 
-        current_path.should == edit_manage_sale_path(Sale.first.id)
-      end
-
-      it 'creates a sale' do 
-        current_path.should == edit_manage_sale_path(Sale.first)
-        page.should have_content("Order #{Sale.first.id}")
+        it 'creates a sale' do 
+          current_path.should == edit_manage_sale_path(Order.first)
+          page.should have_content("Order #{Order.first.pretty_id}")
+        end
       end
     end
   end

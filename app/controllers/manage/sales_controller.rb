@@ -3,13 +3,13 @@ class Manage::SalesController < ManageController
   before_filter :find_sale, except: [:new, :create]
 
   def new
-    @sale = Sale.create
-    redirect_to [:edit, :manage, @sale]
+    order = Order.create(staging_type: 'sale')
+    redirect_to edit_manage_sale_path(order)
   end
 
 private
   def find_sale
     id = params[:sale_id] ? params[:sale_id] : params[:id]
-    @sale = Sale.find(id)
+    @order = Order.find(id)
   end
 end
