@@ -34,8 +34,7 @@ module DragonHoardRails32
     config.active_support.escape_html_entities_in_json = true
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.paths << "#{Rails.root}/lib/assets/dragonsbreath"
-    config.assets.precompile += %w(dragonsbreath.js)
+    config.assets.precompile += %w(manage.js, manage.css)
   end
 end
 
