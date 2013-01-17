@@ -12,6 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require dragonsbreath
-//= require select2
 //= require_tree .
