@@ -13,6 +13,26 @@
       %th Total
       %th &nbsp;
   %tbody
+    - @order.line_items.each do |line_item|
+      %tr.line-item{id: dom_id(line_item)}
+        %td
+          .input-control.text
+            %input.line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...' value="#{line_item.item_id}")
+            %button.helper
+        %td
+          .input-control.text-area
+            %textarea.line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')= line_item.description
+        %td
+          .input-control.text
+            %input.line-item-price(type='text' name='line_item[price]' placeholder='3500.00' value="#{line_item.price}")
+            %button.helper
+        %td
+          .input-control.text
+            %input.line-item-amount(type='text' name='line_item[quantity]' placeholder='1' value="#{line_item.quantity}")
+            %button.helper
+        %td
+          %span.line-item-total
+        %td.line-item-actions.toolbar
     %tr#line-items-form
       %td
         .input-control.text
@@ -32,26 +52,6 @@
       %td
         %span#line-item-total
       %td#line-item-actions.toolbar
-    - @order.line_items.each do |line_item|
-      %tr.line-item{id: dom_id(line_item)}
-        %td
-          .input-control.text
-            %input.line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...' value="#{line_item.item_id}")
-            %button.helper
-        %td
-          .input-control.text-area
-            %textarea.line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')= line_item.description
-        %td
-          .input-control.text
-            %input.line-item-price(type='text' name='line_item[price]' placeholder='3,500.00' value="#{line_item.price}")
-            %button.helper
-        %td
-          .input-control.text
-            %input.line-item-amount(type='text' name='line_item[quantity]' placeholder='1..' value="#{line_item.quantity}")
-            %button.helper
-        %td
-          %span.line-item-total
-        %td.line-item-actions.toolbar
 
 :javascript
   var order = new Order("#{@order.id}");
