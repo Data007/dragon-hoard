@@ -21,7 +21,7 @@ class @Order
   totalLineItemForm: ->
     price  = $('#line-item-price').val()
     amount = $('#line-item-amount').val()
-    total  = accounting.formatMoney(price + amount)
+    total  = accounting.formatMoney(price * amount)
     $('#line-item-total').html(total)
     
 @order = new @Order
