@@ -10,6 +10,7 @@
     = csrf_meta_tags
 
     = stylesheet_link_tag 'manage'
+    = javascript_include_tag 'manage'
 
   %body
     .page.primary
@@ -47,4 +48,3 @@
                         = raw(value)
 
           = yield
-    = javascript_include_tag 'manage'
