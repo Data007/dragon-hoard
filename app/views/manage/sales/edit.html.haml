@@ -1,4 +1,7 @@
-%h1 Order #{@order.pretty_id}
+.page-header-content
+  %h1
+    %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
+    Order #{@order.pretty_id}
 
 %table#line-items-view.striped
   %thead
@@ -11,23 +14,21 @@
       %th &nbsp;
   %tbody#line-items-form
     %tr
-      %td
+      %td(valign='top')
         .input-control.text
           %input#line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...')
           %button.helper
-      %td
-        .input-control.text
+      %td(valign='top')
+        .input-control.text-area
           %textarea#line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')
-          %button.helper
-      %td
+      %td(valign='top')
         .input-control.text
           %input#line-item-price(type='text' name='line_item[price]' placeholder='3,500.00')
           %button.helper
-      %td
+      %td(valign='top')
         .input-control.text
           %input#line-item-amount(type='text' name='line_item[quantity]' placeholder='1')
           %button.helper
-      %td
+      %td(valign='top')
         %span#line-item-total
-      %td#line-item-actions
-  
+      %td#line-item-actions(valign='top')

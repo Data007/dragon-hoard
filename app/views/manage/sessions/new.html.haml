@@ -1,4 +1,9 @@
+%h1
+  %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
+  Authorize
+
 = form_tag [:manage, :session] do
-  = label_tag 'user[pin]', 'Employee ID'
-  = text_field 'user', 'pin'
+  .input-control.text
+    %input(type='text' name='user[pin]' placeholder='Employeed Id')
+    %button.helper
   = submit_tag 'Enter'

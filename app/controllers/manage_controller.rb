@@ -2,6 +2,7 @@ class ManageController < ApplicationController
   layout 'manage'
   skip_before_filter :current_order
   skip_before_filter :clean_up_order
+  before_filter :logout_user, only: [:home]
 
   def home
   end
@@ -17,5 +18,9 @@ private
       session[:redirect_to] = request.fullpath
       redirect_to [:new, :manage, :session] 
     end
+  end
+
+  def logout_user
+    session.delete(:manage_user_id)
   end
 end
