@@ -35,6 +35,7 @@ module DragonHoardRails32
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.precompile += %w(manage.js manage.css)
+    config.assets.paths << Rails.root.join('app','assets','views')
   end
 end
 

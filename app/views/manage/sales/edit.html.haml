@@ -6,52 +6,47 @@
 %table#line-items-view.striped
   %thead
     %tr
-      %th Item Id
-      %th Description
-      %th Price
-      %th Amount
-      %th Total
       %th &nbsp;
-  %tbody
-    - @order.line_items.each do |line_item|
-      %tr.line-item{id: dom_id(line_item)}
+      %th Qty
+      %th Item # or Description
+      %th Taxable
+      %th Price
+      %th &nbsp;
+  - @order.line_items.each do |line_item|
+    %tbody.line_item{id: dom_id(line_item)}
+      %tr
+        %td &nbsp;
         %td
           .input-control.text
-            %input.line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...' value="#{line_item.item_id}")
-            %button.helper
-        %td
-          .input-control.text-area
-            %textarea.line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')= line_item.description
+            = text_field_tag 'line_item[quantity]', line_item.quantity, class: 'line-item-quantity'
         %td
           .input-control.text
-            %input.line-item-price(type='text' name='line_item[price]' placeholder='3500.00' value="#{line_item.price}")
-            %button.helper
+            = text_field_tag 'line_item[summary]', line_item.summary, class: 'line-item-summary'
+        %td
+          .input-control.checkbox
+            = check_box_tag 'line_item[taxable]', true, line_item.taxable, class: 'line-item-taxable'
         %td
           .input-control.text
-            %input.line-item-amount(type='text' name='line_item[quantity]' placeholder='1' value="#{line_item.quantity}")
-            %button.helper
-        %td
-          %span.line-item-total
+            = text_field_tag 'line_item[price]', line_item.price, class: 'line-item-price'
         %td.line-item-actions.toolbar
+  %tbody
     %tr#line-items-form
+      %td &nbsp;
       %td
         .input-control.text
-          %input#line-item-id(type='text' name='line_item[item_id]' placeholder='ID345...')
-          %button.helper
-      %td
-        .input-control.text-area
-          %textarea#line-item-description(name='line_item[description]' placeholder='Something pretty made in your store ...')
+          = text_field_tag 'line_item[quantity]', 1, class: 'line-item-quantity', id: 'line-item-quantity'
       %td
         .input-control.text
-          %input#line-item-price(type='text' name='line_item[price]' placeholder='3,500.00')
-          %button.helper
+          = text_field_tag 'line_item[summary]', nil, class: 'line-item-summary', id: 'line-item-summary'
+      %td
+        = check_box_tag 'line_item[taxable]', true, false, class: 'line-item-taxable', id: 'line-item-taxable'
       %td
         .input-control.text
-          %input#line-item-amount(type='text' name='line_item[quantity]' placeholder='1..' value='1')
-          %button.helper
-      %td
-        %span#line-item-total
-      %td#line-item-actions.toolbar
-
+          = text_field_tag 'line_item[price]', nil, class: 'line-item-price', id: 'line-item-price'
+      %td.line-item-actions.toolbar
+        %button.button.bg-color-green.fg-color-white#line-item-add
+          add
+        
 :javascript
   var order = new Order("#{@order.id}");
+  $('.line-item-taxable').CheckboxSwitch({'on-text': 'Tax', 'off-text': 'No Tax'});

@@ -13,6 +13,7 @@ DragonHoardRails32::Application.routes.draw do
     end
 
     resource  :session
+    resources :live_searches
   end
 
   match 'manage' => 'manage#home'
