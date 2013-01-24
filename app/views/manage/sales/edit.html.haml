@@ -6,7 +6,6 @@
 %table#line-items-view.striped
   %thead
     %tr
-      %th &nbsp;
       %th Qty
       %th Item # or Description
       %th Taxable
@@ -15,7 +14,6 @@
   - @order.line_items.each do |line_item|
     %tbody.line_item{id: dom_id(line_item)}
       %tr
-        %td &nbsp;
         %td
           .input-control.text
             = text_field_tag 'line_item[quantity]', line_item.quantity, class: 'line-item-quantity'
@@ -29,14 +27,21 @@
           .input-control.text
             = text_field_tag 'line_item[price]', line_item.price, class: 'line-item-price'
         %td.line-item-actions.toolbar
-  %tbody
-    %tr#line-items-form
-      %td &nbsp;
+          %button.button.bg-color-green.fg-color-white.line-item-add
+            add
+          %button.button.bg-color-green.fg-color-white.line-item-delete
+            delete
+          %button.button.bg-color-green.fg-color-white.line-item-discount
+            discount
+          %button.button.bg-color-green.fg-color-white.line-item-note
+            note
+  %tbody.line-item#line-items-form
+    %tr
       %td
         .input-control.text
           = text_field_tag 'line_item[quantity]', 1, class: 'line-item-quantity', id: 'line-item-quantity'
       %td
-        .input-control.text
+        .input-control.text.ui-widget
           = text_field_tag 'line_item[summary]', nil, class: 'line-item-summary', id: 'line-item-summary'
       %td
         = check_box_tag 'line_item[taxable]', true, false, class: 'line-item-taxable', id: 'line-item-taxable'
@@ -46,6 +51,12 @@
       %td.line-item-actions.toolbar
         %button.button.bg-color-green.fg-color-white#line-item-add
           add
+        %button.button.bg-color-green.fg-color-white#line-item-delete
+          delete
+        %button.button.bg-color-green.fg-color-white#line-item-discount
+          discount
+        %button.button.bg-color-green.fg-color-white#line-item-note
+          note
         
 :javascript
   var order = new Order("#{@order.id}");
