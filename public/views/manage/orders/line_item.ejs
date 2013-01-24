@@ -1,0 +1,29 @@
+<tr class='line-item' id='line-item-<%= count %>'>
+  <td>
+    <div class='input-control text'>
+      <input type='text' name='line_item[item_id]' placeholder='ID...' value='<%= lineItem.item_id %>' class='line-item-id' />
+      <button class='helper'></button>
+    </div>
+  </td>
+  <td>
+    <div class='input-control textarea'>
+      <textarea name='line_item[description]' placeholder='Something prett made in your store ...' class='line-item-description'><%= lineItem.description %></textarea>
+    </div>
+  </td>
+  <td>
+    <div class='input-control text'>
+      <input type='text' name='line_item[price]' placeholder='3500.00' value='<%= lineItem.price %>' class='line-item-price' />
+      <button class='helper'></button>
+    </div>
+  </td>
+  <td>
+    <div class='input-control text'>
+      <input type='text' name='line_item[quantity]' placeholder='1' value='<%= lineItem.quantity %>' class='line-item-amount' />
+      <button class='helper'></button>
+    </div>
+  </td>
+  <td>
+    <span class='line-item-total'>&nbsp;</span>
+  </td>
+  <td class='line-item-actions toolbar'>&nbsp;</td>
+</tr>
