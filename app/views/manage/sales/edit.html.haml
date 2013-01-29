@@ -29,17 +29,23 @@
         %td.line-item-actions
           %button.button.bg-color-red.fg-color-white.line-item-delete
             delete
-          %button.button.bg-color-green.fg-color-white.line-item-discount
+          %button.button.line-item-discount
             discount
-          %button.button.bg-color-green.fg-color-white.line-item-note
+          %button.button.bg-color-green.fg-color-white.line-item-note-button
             note
+      %tr.line-item-note-view{style: 'display: none'}
+        %td &nbsp;
+        %td{colspan: 3}
+          .input-control.textarea
+            = text_area_tag 'line_item[note]', line_item.note, class: 'line-item-note'
+        %td &nbsp;
   %tbody.line-item#line-items-form
     %tr
       %td
         .input-control.text
           = text_field_tag 'line_item[quantity]', 1, class: 'line-item-quantity', id: 'line-item-quantity'
       %td
-        .input-control.text.ui-widget
+        .input-control.text
           = text_field_tag 'line_item[summary]', nil, class: 'line-item-summary', id: 'line-item-summary'
       %td
         = check_box_tag 'line_item[taxable]', true, false, class: 'line-item-taxable', id: 'line-item-taxable'
@@ -51,10 +57,13 @@
           add
         %button.button.bg-color-red.fg-color-white#line-item-delete
           delete
-        %button.button.bg-color-green.fg-color-white#line-item-discount
+        %button.button#line-item-discount
           discount
-        %button.button.bg-color-green.fg-color-white#line-item-note
+        %button.button.bg-color-green.fg-color-white.line-item-note-button
           note
-        
-:javascript
-  // $('.line-item-taxable').CheckboxSwitch({'on-text': 'Tax', 'off-text': 'No Tax'});
+    %tr.line-item-note-view{style: 'display: none'}
+      %td &nbsp;
+      %td{colspan: 3}
+        .input-control.textarea
+          = text_area_tag 'line_item[note]', nil, class: 'line-item-note', id: 'line-item-note'
+      %td &nbsp;

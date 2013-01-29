@@ -26,8 +26,17 @@
     </td>
     <td class='line-item-actions'>
       <button class='button bg-color-red fg-color-white line-item-delete'>delete</button>
-      <button class='button bg-color-green fg-color-white line-item-discount'>discount</button>
-      <button class='button bg-color-green fg-color-white line-item-note'>note</button>
+      <button class='button line-item-discount'>discount</button>
+      <button class='button bg-color-green fg-color-white line-item-note-button'>note</button>
     </td>
+  </tr>
+  <tr class='line-item-note-view' style='display: none'>
+    <td>&nbsp;</td>
+    <td colspan=3>
+      <div class='input-control textarea'>
+        <textarea class='line-item-note' name='line_item[note]'><%= lineItem.note %></textarea>
+      </div>
+    </td>
+    <td>&nbsp;</td>
   </tr>
 </tbody>

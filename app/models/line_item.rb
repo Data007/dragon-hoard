@@ -13,6 +13,7 @@ class LineItem
   field :name
   field :description
   field :summary
+  field :note
   field :quick_id
   field :size,          type: Float
   field :custom_id
