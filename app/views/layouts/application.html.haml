@@ -11,14 +11,15 @@
     %title Wexford Jewelers | our passion is design #{yield :page_title}
 
     = csrf_meta_tags
+    %link(href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css')
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "application"
     = yield :extra_javascript
 
   %body
-    .page
-      %header.row
-        = render partial: 'layouts/header'
+    .page.grid-whole
+      -# %header.grid-whole
+      -#   = render partial: 'layouts/header'
 
       - if flash.present?
         %section.row
@@ -29,7 +30,7 @@
         = yield
       
       %footer.row
-        %p &copy; Wexford Jewelers, Inc. 2012
+        %p &copy; Wexford Jewelers, Inc. 2013
 
     - if Rails.env.production?
       :javascript

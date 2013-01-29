@@ -10,4 +10,5 @@
  *
  *= require_self
  *= require select2
+ *= require_tree ./application/
  */

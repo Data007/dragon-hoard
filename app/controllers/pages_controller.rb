@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @items = Item.published.listable[0..4]
+    @items = Item.published.listable
   end
   
   def bad_route
