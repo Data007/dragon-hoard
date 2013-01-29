@@ -26,7 +26,7 @@
         %td
           .input-control.text
             = text_field_tag 'line_item[price]', line_item.price, class: 'line-item-price'
-        %td.line-item-actions.toolbar
+        %td.line-item-actions
           %button.button.bg-color-green.fg-color-white.line-item-add
             add
           %button.button.bg-color-green.fg-color-white.line-item-delete
@@ -48,7 +48,7 @@
       %td
         .input-control.text
           = text_field_tag 'line_item[price]', nil, class: 'line-item-price', id: 'line-item-price'
-      %td.line-item-actions.toolbar
+      %td.line-item-actions
         %button.button.bg-color-green.fg-color-white#line-item-add
           add
         %button.button.bg-color-green.fg-color-white#line-item-delete
