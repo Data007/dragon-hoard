@@ -13,6 +13,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "application"
+    = yield :extra_javascript
 
   %body
     .page
@@ -29,8 +30,6 @@
       
       %footer.row
         %p &copy; Wexford Jewelers, Inc. 2012
-
-    = yield :extra_javascript
 
     - if Rails.env.production?
       :javascript
