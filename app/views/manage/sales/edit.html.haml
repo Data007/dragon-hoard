@@ -3,7 +3,7 @@
     %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
     Order #{@order.pretty_id}
 
-%table#line-items-view.striped
+%table#line-items-view.striped{data: {order: @order.id}}
   %thead
     %tr
       %th Qty
@@ -12,7 +12,7 @@
       %th Price
       %th &nbsp;
   - @order.line_items.each do |line_item|
-    %tbody.line_item{id: dom_id(line_item)}
+    %tbody.line-item{id: dom_id(line_item), data: {id: line_item.id}}
       %tr
         %td
           .input-control.text
@@ -27,9 +27,7 @@
           .input-control.text
             = text_field_tag 'line_item[price]', line_item.price, class: 'line-item-price'
         %td.line-item-actions
-          %button.button.bg-color-green.fg-color-white.line-item-add
-            add
-          %button.button.bg-color-green.fg-color-white.line-item-delete
+          %button.button.bg-color-red.fg-color-white.line-item-delete
             delete
           %button.button.bg-color-green.fg-color-white.line-item-discount
             discount
@@ -51,7 +49,7 @@
       %td.line-item-actions
         %button.button.bg-color-green.fg-color-white#line-item-add
           add
-        %button.button.bg-color-green.fg-color-white#line-item-delete
+        %button.button.bg-color-red.fg-color-white#line-item-delete
           delete
         %button.button.bg-color-green.fg-color-white#line-item-discount
           discount
@@ -59,5 +57,4 @@
           note
         
 :javascript
-  var order = new Order("#{@order.id}");
-  $('.line-item-taxable').CheckboxSwitch({'on-text': 'Tax', 'off-text': 'No Tax'});
+  // $('.line-item-taxable').CheckboxSwitch({'on-text': 'Tax', 'off-text': 'No Tax'});

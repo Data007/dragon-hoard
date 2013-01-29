@@ -15,8 +15,10 @@ private
 
   def force_pin
     unless manage_user
-      session[:redirect_to] = request.fullpath
-      redirect_to [:new, :manage, :session] 
+      session[:manage_user_id] = User.first.id
+      ## Commented out for the sake of demoing
+      # session[:redirect_to] = request.fullpath
+      # redirect_to [:new, :manage, :session] 
     end
   end
 

@@ -12,6 +12,7 @@ class LineItem
   field :refunded,      type: Boolean, default: false
   field :name
   field :description
+  field :summary
   field :quick_id
   field :size,          type: Float
   field :custom_id
