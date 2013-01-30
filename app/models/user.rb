@@ -111,10 +111,23 @@ class User
       flatten.first
     end
 
+    def find_from_query query
+      variations = [
+        Regexp.new(query),
+        Regexp.new(query.downcase),
+        Regexp.new(query.capitalize)
+      ]
+      users = []
+      users += User.where(:first_name.in => variations)
+      users += User.where(:last_name.in => variations)
+      users += User.where(:name.in => variations)
+      return users.flatten.compact.uniq
+    end
   end
   ##
 
   def full_name
+    return name unless (first_name && last_name)
     "#{first_name} #{last_name}"
   end
 

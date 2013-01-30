@@ -1,7 +1,3 @@
-%ul
-  - @users.each do |user|
-    %li
-      = "#{user.first_name}" + " " + "#{user.last_name}"
-      = link_to 'Select', manage_order_user_path(@order.id, user)
-
-
+- @users.each do |user|
+  %a.tile{href: manage_order_user_path(@order, user)}
+    = user.full_name

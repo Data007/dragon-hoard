@@ -4,7 +4,7 @@ class Manage::Orders::UsersController < Manage::OrdersController
   end
 
   def find
-    @users = User.where(first_name: params[:query])
+    @users = User.find_from_query(params[:query])
   end
 
   def show
