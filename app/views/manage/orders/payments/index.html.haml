@@ -4,7 +4,6 @@
     Order #{@order.pretty_id}
 
   = render partial: 'manage/orders/line_items', locals: {order: @order}
-
   .checkout_button_quick_sale
     %button.button.bg-color-green.fg-color-white
-      = link_to 'Checkout', manage_order_payments_path(@order)
+      = link_to 'Add a User'

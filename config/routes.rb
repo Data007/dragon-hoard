@@ -9,7 +9,13 @@ DragonHoardRails32::Application.routes.draw do
 
   namespace :manage do
     resources :orders do
-      resources :line_items, controller: 'orders/line_items'
+      resources :line_items,  controller: 'orders/line_items' 
+      resources :payments,    controller: 'orders/payments'
+      resources :users,       controller: 'orders/users' do
+        collection do
+          post :find
+        end
+      end
     end
 
     resources :sales
