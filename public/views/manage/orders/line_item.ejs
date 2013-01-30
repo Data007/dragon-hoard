@@ -1,29 +1,40 @@
-<tr class='line-item' id='line-item-<%= count %>'>
-  <td>
-    <div class='input-control text'>
-      <input type='text' name='line_item[item_id]' placeholder='ID...' value='<%= lineItem.item_id %>' class='line-item-id' />
-      <button class='helper'></button>
-    </div>
-  </td>
-  <td>
-    <div class='input-control textarea'>
-      <textarea name='line_item[description]' placeholder='Something prett made in your store ...' class='line-item-description'><%= lineItem.description %></textarea>
-    </div>
-  </td>
-  <td>
-    <div class='input-control text'>
-      <input type='text' name='line_item[price]' placeholder='3500.00' value='<%= lineItem.price %>' class='line-item-price' />
-      <button class='helper'></button>
-    </div>
-  </td>
-  <td>
-    <div class='input-control text'>
-      <input type='text' name='line_item[quantity]' placeholder='1' value='<%= lineItem.quantity %>' class='line-item-amount' />
-      <button class='helper'></button>
-    </div>
-  </td>
-  <td>
-    <span class='line-item-total'>&nbsp;</span>
-  </td>
-  <td class='line-item-actions toolbar'>&nbsp;</td>
-</tr>
+<tbody class='line-item active' id='line_item_<%= lineItem._id %>' data-id='<%= lineItem._id %>'>
+  <tr>
+    <td>
+      <div class='input-control text'>
+        <input type='text' name='line_item[quantity]' class='line-item-quantity' value='<%= lineItem.quantity %>' />
+      </div>
+    </td>
+    <td>
+      <div class='input-control text'>
+        <input type='text' name='line_item[summary]' class='line-item-summary' value='<%= lineItem.summary %>' />
+      </div>
+    </td>
+    <td>
+      <% if(lineItem.taxable == true) { %>
+        <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' checked='checked' />
+      <% } else { %>
+        <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' />
+      <% } %>
+    </td>
+    <td>
+      <div class='input-control text'>
+        <input type='text' name='line_item[price]' class='line-item-price' value='<%= lineItem.price %>' />
+      </div>
+    </td>
+    <td class='line-item-actions'>
+      <button class='button bg-color-red fg-color-white line-item-delete'>delete</button>
+      <button class='button line-item-discount'>discount</button>
+      <button class='button bg-color-green fg-color-white line-item-note-button'>note</button>
+    </td>
+  </tr>
+  <tr class='line-item-note-view' style='display: none'>
+    <td>&nbsp;</td>
+    <td colspan=3>
+      <div class='input-control textarea'>
+        <textarea class='line-item-note' name='line_item[note]'><%= lineItem.note %></textarea>
+      </div>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</tbody>
