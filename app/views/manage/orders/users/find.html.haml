@@ -2,6 +2,6 @@
   - @users.each do |user|
     %li
       = "#{user.first_name}" + " " + "#{user.last_name}"
-      = link_to 'Select', manage_order_user_path(user)
+      = link_to 'Select', manage_order_user_path(@order.id, user)
 
 

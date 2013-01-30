@@ -17,6 +17,8 @@ describe 'Manage Sales' do
         page.should have_content('DragonHoard')
 
         click_link 'Select'
+
+        current_path.should == edit_manage_sale_path(Order.first)
       end
     end
   end
