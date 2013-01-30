@@ -13,6 +13,7 @@ DragonHoardRails32::Application.routes.draw do
     end
 
     resources :sales
+    resources :quick_sales
     resource  :session
     resources :live_searches
   end

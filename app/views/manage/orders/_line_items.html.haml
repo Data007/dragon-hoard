@@ -1,0 +1,63 @@
+%table#line-items-view.striped{data: {order: order.id}}
+  %thead
+    %tr
+      %th Qty
+      %th Item # or Description
+      %th Taxable
+      %th Price
+      %th &nbsp;
+  - order.line_items.each do |line_item|
+    %tbody.line-item{id: dom_id(line_item), data: {id: line_item.id}}
+      %tr
+        %td
+          .input-control.text
+            = text_field_tag 'line_item[quantity]', line_item.quantity, class: 'line-item-quantity'
+        %td
+          .input-control.text
+            = text_field_tag 'line_item[summary]', line_item.summary, class: 'line-item-summary'
+        %td
+          = check_box_tag 'line_item[taxable]', true, line_item.taxable, class: 'line-item-taxable'
+        %td
+          .input-control.text
+            = text_field_tag 'line_item[price]', line_item.price, class: 'line-item-price'
+        %td.line-item-actions
+          %button.button.bg-color-red.fg-color-white.line-item-delete
+            delete
+          %button.button.line-item-discount
+            discount
+          %button.button.bg-color-green.fg-color-white.line-item-note-button
+            note
+      %tr.line-item-note-view{style: 'display: none'}
+        %td &nbsp;
+        %td{colspan: 3}
+          .input-control.textarea
+            = text_area_tag 'line_item[note]', line_item.note, class: 'line-item-note'
+        %td &nbsp;
+  %tbody.line-item#line-items-form
+    %tr
+      %td
+        .input-control.text
+          = text_field_tag 'line_item[quantity]', 1, class: 'line-item-quantity', id: 'line-item-quantity'
+      %td
+        .input-control.text
+          = text_field_tag 'line_item[summary]', nil, class: 'line-item-summary', id: 'line-item-summary'
+      %td
+        = check_box_tag 'line_item[taxable]', true, false, class: 'line-item-taxable', id: 'line-item-taxable'
+      %td
+        .input-control.text
+          = text_field_tag 'line_item[price]', nil, class: 'line-item-price', id: 'line-item-price'
+      %td.line-item-actions
+        %button.button.bg-color-green.fg-color-white#line-item-add
+          add
+        %button.button.bg-color-red.fg-color-white#line-item-delete
+          delete
+        %button.button#line-item-discount
+          discount
+        %button.button.bg-color-green.fg-color-white.line-item-note-button
+          note
+    %tr.line-item-note-view{style: 'display: none'}
+      %td &nbsp;
+      %td{colspan: 3}
+        .input-control.textarea
+          = text_area_tag 'line_item[note]', nil, class: 'line-item-note', id: 'line-item-note'
+      %td &nbsp;

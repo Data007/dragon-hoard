@@ -11,13 +11,11 @@
       </div>
     </td>
     <td>
-      <div class='input-control checkbox'>
-        <% if(lineItem.taxable == true) { %>
-          <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' checked='checked' />
-        <% } else { %>
-          <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' />
-        <% } %>
-      </div>
+      <% if(lineItem.taxable == true) { %>
+        <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' checked='checked' />
+      <% } else { %>
+        <input type='checkbox' name='line_item[taxable]' class='line-item-taxable' value='<%= lineItem.taxable %>' />
+      <% } %>
     </td>
     <td>
       <div class='input-control text'>
