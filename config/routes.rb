@@ -18,8 +18,18 @@ DragonHoardRails32::Application.routes.draw do
       end
     end
 
-    resources :sales
-    resources :quick_sales
+    resources :sales do
+      member do
+        get :checkout
+      end
+    end
+
+    resources :quick_sales do
+      member do
+        get :checkout
+      end
+    end
+
     resource  :session
     resources :live_searches
   end

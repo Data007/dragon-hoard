@@ -1,9 +1,11 @@
 .page-header-content
   %h1
     %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
-    Editing Quick Sale #{@order.pretty_id}
+    Checking Out Sale #{@order.pretty_id}
 
 = render partial: 'manage/orders/line_items', locals: {order: @order}
 
-%a.button.bg-color-green.fg-color-white{href: checkout_manage_quick_sales_path(@order)}
-  Checkout
+%a.button.bg-color-green.fg-color-white{href: edit_manage_sale_path(@order)}
+  Edit Order
+%button.button
+  Add Payment
