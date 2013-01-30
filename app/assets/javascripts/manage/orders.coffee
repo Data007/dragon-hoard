@@ -14,13 +14,19 @@
 @subTotalOrder = () ->
   total = 0.0
   $('.line-item.active').each ->
-    total += parseFloat($(this).find('.line-item-price').val())
+    price = parseFloat($(this).find('.line-item-price').val())
+    quantity = parseFloat($(this).find('.line-item-quantity').val())
+    total += parseFloat(price * quantity)
   return total
 
 @taxOrder = () ->
   tax = 0.0
   $('.line-item.active .line-item-taxable:checked').each ->
-    tax += parseFloat($(this).parent().parent().find('.line-item-price').val() * 0.06)
+    lineItem = $(this).parent().parent().parent()
+    price = parseFloat(lineItem.find('.line-item-price').val())
+    quantity = parseFloat(lineItem.find('.line-item-quantity').val())
+
+    tax += parseFloat((price * quantity) * 0.06)
   return tax
 
 @totalOrder = () ->
@@ -30,6 +36,60 @@
   $('#subtotal').text accounting.formatMoney(subTotalOrder())
   $('#tax').text accounting.formatMoney(taxOrder())
   $('#total').text accounting.formatMoney(totalOrder())
+
+@autoSaveLineItems = () ->
+  orderId = $('#line-items-view').attr('data-order')
+  $('.line-item.active').each ->
+    lineItem = $(this)
+    lineItem.find('.line-item-quantity').keyup ->
+      if $(this).attr('data-value') != $(this).val()
+        $.ajax
+          url: "/manage/orders/#{orderId}/line_items/#{lineItem.attr('data-id')}"
+          type: 'PUT'
+          data: 
+            line_item: 
+              quantity: $(this).val()
+        $(this).attr('data-value', $(this).val())
+        bindLineItem $(this)
+    lineItem.find('.line-item-summary').keyup ->
+      if $(this).attr('data-value') != $(this).val()
+        $.ajax
+          url: "/manage/orders/#{orderId}/line_items/#{lineItem.attr('data-id')}"
+          type: 'PUT'
+          data: 
+            line_item: 
+              summary: $(this).val()
+        $(this).attr('data-value', $(this).val())
+        bindLineItem $(this)
+    lineItem.find('.line-item-taxable').click ->
+      $.ajax
+        url: "/manage/orders/#{orderId}/line_items/#{lineItem.attr('data-id')}"
+        type: 'PUT'
+        data: 
+          line_item: 
+            taxable: ($(this).prop('checked') ? true : false)
+      $(this).attr('data-value', $(this).val())
+      bindLineItem $(this)
+    lineItem.find('.line-item-price').keyup ->
+      if $(this).attr('data-value') != $(this).val()
+        $.ajax
+          url: "/manage/orders/#{orderId}/line_items/#{lineItem.attr('data-id')}"
+          type: 'PUT'
+          data: 
+            line_item: 
+              price: $(this).val()
+        $(this).attr('data-value', $(this).val())
+        bindLineItem $(this)
+    lineItem.find('.line-item-note').keyup ->
+      if $(this).attr('data-value') != $(this).val()
+        $.ajax
+          url: "/manage/orders/#{orderId}/line_items/#{lineItem.attr('data-id')}"
+          type: 'PUT'
+          data: 
+            line_item: 
+              note: $(this).val()
+        $(this).attr('data-value', $(this).val())
+        bindLineItem $(this)
 
 @bindLineItem = (lineItem) ->
   orderId = $('#line-items-view').attr('data-order')
@@ -99,7 +159,7 @@
     noteArea.find('.line-item-note').focus()
 
   refreshTotals()
-  lineItemForm.find('#line-item-summary').focus()
+  autoSaveLineItems()
 
 @refreshLineItems = () ->
   lineItems = $('.line-item')
