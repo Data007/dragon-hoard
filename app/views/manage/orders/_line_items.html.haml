@@ -7,7 +7,7 @@
       %th Price
       %th &nbsp;
   - order.line_items.each do |line_item|
-    %tbody.line-item{id: dom_id(line_item), data: {id: line_item.id}}
+    %tbody.line-item.active{id: dom_id(line_item), data: {id: line_item.id}}
       %tr
         %td
           .input-control.text
@@ -61,3 +61,22 @@
         .input-control.textarea
           = text_area_tag 'line_item[note]', nil, class: 'line-item-note', id: 'line-item-note'
       %td &nbsp;
+  %tbody#totals
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong SubTotal
+      %td
+        %strong#subtotal
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong Tax
+      %td
+        %strong#tax
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong Total
+      %td
+        %strong#total

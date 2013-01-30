@@ -11,6 +11,26 @@
   $('#line-items-form #line-item-price').val('')
   $('#line-items-form #line-item-note').val('')
 
+@subTotalOrder = () ->
+  total = 0.0
+  $('.line-item.active').each ->
+    total += parseFloat($(this).find('.line-item-price').val())
+  return total
+
+@taxOrder = () ->
+  tax = 0.0
+  $('.line-item.active .line-item-taxable:checked').each ->
+    tax += parseFloat($(this).parent().parent().find('.line-item-price').val() * 0.06)
+  return tax
+
+@totalOrder = () ->
+  return parseFloat(subTotalOrder() + taxOrder())
+
+@refreshTotals = () ->
+  $('#subtotal').text accounting.formatMoney(subTotalOrder())
+  $('#tax').text accounting.formatMoney(taxOrder())
+  $('#total').text accounting.formatMoney(totalOrder())
+
 @bindLineItem = (lineItem) ->
   orderId = $('#line-items-view').attr('data-order')
   lineItemForm = $('#line-items-form')
@@ -78,6 +98,7 @@
     noteArea.show()
     noteArea.find('.line-item-note').focus()
 
+  refreshTotals()
   lineItemForm.find('#line-item-summary').focus()
 
 @refreshLineItems = () ->
