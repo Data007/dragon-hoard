@@ -3,7 +3,7 @@
     %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
     Checking Out Sale #{@order.pretty_id}
 
-= render partial: 'manage/orders/line_items', locals: {order: @order}
+= render partial: 'manage/orders/total', locals: {order: @order}
 
 %a.button.bg-color-green.fg-color-white{href: edit_manage_sale_path(@order)}
   Edit Order

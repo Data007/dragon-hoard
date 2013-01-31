@@ -1,0 +1,40 @@
+%table.striped
+  %thead
+    %tr
+      %th Qty
+      %th Item # or Description
+      %th Taxable
+      %th Price
+      %th &nbsp;
+  - order.line_items.each do |line_item|
+    %tbody
+      %tr
+        %td= line_item.quantity
+        %td= line_item.summary
+        %td= line_item.taxable ? 'Tax' : 'No Tax'
+        %td= number_to_currency line_item.total
+        %td &nbsp;
+      - if line_item.note
+        %tr
+          %td &nbsp;
+          %td{colspan: 3}= line_item.note
+          %td &nbsp;
+  %tbody
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong SubTotal
+      %td
+        %strong= order.subtotal
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong Tax
+      %td
+        %strong= order.tax
+    %tr
+      %td{colspan: 3} &nbsp;
+      %td
+        %strong Total
+      %td
+        %strong= order.total
