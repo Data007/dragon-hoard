@@ -21,12 +21,14 @@ DragonHoardRails32::Application.routes.draw do
     resources :sales do
       member do
         get :checkout
+        get :cancel
       end
     end
 
     resources :quick_sales do
       member do
         get :checkout
+        get :cancel
       end
     end
 

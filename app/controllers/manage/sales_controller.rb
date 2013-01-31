@@ -8,6 +8,15 @@ class Manage::SalesController < ManageController
     redirect_to edit_manage_sale_path(order)
   end
 
+  def cancel
+    destroy
+  end
+
+  def destroy
+    @order.destroy
+    redirect_to manage_path
+  end
+
 private
   def find_sale
     id = params[:sale_id] ? params[:sale_id] : params[:id]

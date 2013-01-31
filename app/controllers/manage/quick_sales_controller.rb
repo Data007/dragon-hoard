@@ -7,6 +7,15 @@ class Manage::QuickSalesController < ManageController
     redirect_to edit_manage_quick_sale_path(order)
   end
 
+  def cancel
+    destroy
+  end
+
+  def destroy
+    @order.destroy
+    redirect_to manage_path
+  end
+
 private
   def find_quick_sale
     id = params[:quick_sale_id] ? params[:quick_sale_id] : params[:id]

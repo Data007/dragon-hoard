@@ -15,5 +15,13 @@
 
 = render partial: 'manage/orders/line_items', locals: {order: @order}
 
+%a.button.bg-color-green.fg-color-white{href: find_manage_order_users_path(@order)}
+  Lookup Customer
+%a.button
+  Save for Later
+%a.button
+  Layaway
 %a.button.bg-color-green.fg-color-white{href: checkout_manage_sale_path(@order)}
   Checkout
+%a.button.bg-color-green.fg-color-white{href: cancel_manage_sale_path(@order)}
+  Cancel
