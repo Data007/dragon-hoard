@@ -1,0 +1,2 @@
+module Manage::UserManagementHelper
+end

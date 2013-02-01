@@ -1,0 +1,16 @@
+= form_for [@user], html: {class: 'form-horizontal'} do |user_form|
+  %fieldset
+    %legend User Details
+    = user_form.label :first_name, 'First Name'
+    = user_form.text_field :first_name
+    = user_form.label :last_name, 'Last Name'
+    = user_form.text_field :last_name
+    
+    = user_form.fields_for :addresses, html: {class: 'form-horizontal'} do |address_form|
+      %fieldset
+        %legend Address
+        = address_form.text_field :address_1, placeholder: 'Address 1'
+        = address_form.text_field :city, placeholder: 'city'
+        = address_form.text_field :postal_code, placeholder: 'zip'
+        = address_form.select :province, Shipper::STATES
+  = user_form.submit 'Create User'
