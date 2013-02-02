@@ -3,9 +3,11 @@
     %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
     Checking Out Quick Sale #{@order.pretty_id}
 
-= render partial: 'manage/orders/line_items', locals: {order: @order}
+= render partial: 'manage/orders/total', locals: {order: @order}
 
-%button.button
-  Link to User
+%a.button.bg-color-green.fg-color-white{href: new_manage_order_user_path(@order)}
+  Lookup Customer
+%a.button.bg-color-green.fg-color-white{href: edit_manage_quick_sale_path(@order)}
+  Edit Order
 %button.button
   Add Payment
