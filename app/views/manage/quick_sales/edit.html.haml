@@ -5,7 +5,7 @@
 
 = render partial: 'manage/orders/line_items', locals: {order: @order}
 
-%a.button.bg-color-green.fg-color-white{href: find_manage_order_users_path(@order)}
+%a.button.bg-color-green.fg-color-white{href: new_manage_order_user_path(@order)}
   Lookup Customer
 %a.button
   Save for Later

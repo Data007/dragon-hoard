@@ -14,7 +14,7 @@
         %td= line_item.taxable ? 'Tax' : 'No Tax'
         %td= number_to_currency line_item.total
         %td &nbsp;
-      - if line_item.note
+      - if line_item.note.present?
         %tr
           %td &nbsp;
           %td{colspan: 3}= line_item.note
