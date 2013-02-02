@@ -1,5 +1,23 @@
-%a.tile.icon.bg-color-blue{href: new_manage_user_path}
-  .tile-content
-    %h1.icon-large.icon-tag
-  .brand
-    .name Add a User
+%div
+  %a.tile.icon.bg-color-blue{href: new_manage_user_path}
+    .tile-content
+      %h1.icon-large.icon-tag
+    .brand
+      .name Add a User
+%div
+  %table
+    %thead
+      %tr
+        %th First Name
+        %th Last Name
+        %th Email
+        %th &nbsp;
+        %th &nbsp;
+    - @customers.each do |customer|
+      %tbody
+        %tr{id: customer.id}
+          %td= customer.first_name
+          %td= customer.last_name
+          %td= customer.email
+          %td= link_to 'edit', edit_manage_user_path(customer)
+          %td= link_to 'delete', [:manage, customer], method: 'delete'
