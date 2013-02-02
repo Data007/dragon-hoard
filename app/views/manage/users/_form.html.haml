@@ -1,4 +1,4 @@
-= form_for [@user], html: {class: 'form-horizontal'} do |user_form|
+= form_for [:manage, @customer], html: {class: 'form-horizontal'} do |user_form|
   %fieldset
     %legend User Details
     = user_form.hidden_field :role, value: 'customer'
@@ -22,9 +22,13 @@
     = user_form.label :email, 'Email'
     = user_form.text_field :email
 
+    = user_form.label :email_confirmation, 'Email'
+    = user_form.text_field :email_confirmation
+
     = user_form.label :anniversary
     = user_form.text_field :anniversary
 
     = user_form.label 'Ring Size'
     = user_form.select :ring_size, User::RING_SIZES
-  = user_form.submit 'Create User'
+  .actions
+    = user_form.submit 'Create User'
