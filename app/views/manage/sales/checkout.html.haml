@@ -3,6 +3,16 @@
     %a.icon-arrow-left-3.page-back(onclick='javascript:history.back()')
     Checking Out Sale #{@order.pretty_id}
 
+.customer
+  - address = @order.user.addresses.first
+  .name= @order.user.full_name
+  .address
+    .line1= address.address_1
+    - if address.address_2.present?
+      .line2= address.address_2
+    .bottom
+      = "#{address.city}, #{address.province} #{address.postal_code} #{address.country}"
+
 = render partial: 'manage/orders/total', locals: {order: @order}
 
 %a.button.bg-color-green.fg-color-white{href: edit_manage_sale_path(@order)}

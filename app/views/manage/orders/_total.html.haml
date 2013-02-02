@@ -25,16 +25,16 @@
       %td
         %strong SubTotal
       %td
-        %strong= order.subtotal
+        %strong= number_to_currency order.subtotal
     %tr
       %td{colspan: 3} &nbsp;
       %td
         %strong Tax
       %td
-        %strong= order.tax
+        %strong= number_to_currency order.tax
     %tr
       %td{colspan: 3} &nbsp;
       %td
         %strong Total
       %td
-        %strong= order.total
+        %strong= number_to_currency order.total

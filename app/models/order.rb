@@ -123,9 +123,13 @@ class Order
   end
 
   def total
-    rates = Shipper.rates(Shipper.destination(address), Shipper.sample_packages)
+    if address && shipping_option
+      rates = Shipper.rates(Shipper.destination(address), Shipper.sample_packages)
     
-    subtotal + tax + rates[shipping_option.to_sym][:price]
+      subtotal + tax + rates[shipping_option.to_sym][:price]
+    else
+      subtotal + tax
+    end
   end
 
   def payments_total
