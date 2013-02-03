@@ -1,24 +1,18 @@
-%div
-  %table
-    %thead
-      %tr
-        %th First Name
-        %th Last Name
-        %th Email
-        %th 
-          %button.button.bg-color-green.fg-color-white
-            = link_to 'Add a User', new_manage_user_path
-        %th
-          %a.button.bg-color-blue.fg-color-black{href: new_manage_user_path}
+%table.striped
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Email
+      %th 
+        = link_to 'Add a User', [:new, :manage, :user], class: 'button bg-color-green fg-color-white'
+  %tbody
     - @customers.each do |customer|
-      %tbody
-        %tr{id: customer.id}
-          %td= customer.first_name
-          %td= customer.last_name
-          %td= customer.email
-          %td
-            %button.bg-color-purple.fg-color-white
-              = link_to 'edit', edit_manage_user_path(customer)
-          %td
-            %button.bg-color-red
-              = link_to 'delete', [:manage, customer], method: 'delete'
+      %tr{id: dom_id(customer)}
+        %td= customer.first_name
+        %td= customer.last_name
+        %td= customer.email
+        %td
+          %a.button.bg-color-green.fg-color-white{href: edit_manage_user_path(customer)}
+            edit 
+          = link_to 'delete', manage_user_path(customer), method: :delete, confirm: 'Are you sure you want to delete this user?', class: 'button bg-color-red fg-color-white'

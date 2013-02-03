@@ -9,41 +9,41 @@
       = user_form.label :last_name, 'Last Name'
       = user_form.text_field :last_name
     
+  %fieldset
+    %legend Addresses
     = user_form.fields_for :addresses  do |address_form|
-      %fieldset
-        %legend Address
-        .input-control.text
-          = address_form.text_field :address_1, placeholder: 'Address 1'
-          = address_form.text_field :city, placeholder: 'city'
-          = address_form.text_field :postal_code, placeholder: 'zip'
-        .input-control.select
-          = address_form.select :province, Shipper::STATES
-    = user_form.fields_for :phones do |phone_form|
-      %fieldset
-        %legend Phone
-        .input-control.text
-          = phone_form.text_field :number, placeholder: 'Number'
+      .input-control.text
+        = address_form.text_field :address_1, placeholder: 'Address 1'
+        = address_form.text_field :city, placeholder: 'city'
+        = address_form.text_field :postal_code, placeholder: 'zip'
+      .input-control.select
+        = address_form.select :province, Shipper::STATES
+  %fieldset
+    %legend Phone
+      = user_form.fields_for :phones do |phone_form|
+      .input-control.text
+        = phone_form.phone_field :number, placeholder: 'Number'
   
-    .input-control.text
-      = user_form.label :email, 'Email'
-      = user_form.text_field :email
+  .input-control.text
+    = user_form.label :email, 'Email'
+    = user_form.email_field :email
 
-      = user_form.label :email_confirmation, 'Email Confirmation'
-      = user_form.text_field :email_confirmation
+    = user_form.label :email_confirmation, 'Email Confirmation'
+    = user_form.email_field :email_confirmation
 
-    .input-control.password
-      = user_form.label :password, 'Password'
-      = user_form.text_field :password
+  .input-control.password
+    = user_form.label :password, 'Password'
+    = user_form.password_field :password
 
-      = user_form.label :password_confirmation, 'Password Confirmation'
-      = user_form.text_field :password_confirmation
+    = user_form.label :password_confirmation, 'Password Confirmation'
+    = user_form.password_field :password_confirmation
 
-    .input-control.text
-      = user_form.label :anniversary
-      = user_form.text_field :anniversary
+  .input-control.text
+    = user_form.label :anniversary
+    = user_form.text_field :anniversary
 
-    .input-control.select
-      = user_form.label 'Ring Size'
-      = user_form.select :ring_size, User::RING_SIZES
+  .input-control.select
+    = user_form.label 'Ring Size'
+    = user_form.select :ring_size, User::RING_SIZES
   .actions
     = user_form.submit 'Save' 
