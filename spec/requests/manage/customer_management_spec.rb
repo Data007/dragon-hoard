@@ -22,6 +22,8 @@ describe 'Manage Customers' do
       fill_in 'user_phones_attributes_0_number', with: '2318783353'
       fill_in 'user_email', with: 'bryan@deepwoodsbrigade.com'
       fill_in 'user_email_confirmation', with: 'bryan@deepwoodsbrigade.com'
+      fill_in 'user_password', with: 'password'
+      fill_in 'user_password_confirmation', with: 'password'
       fill_in 'user_anniversary', with: '12/15/12'
       select  '6 1/2', from: 'user_ring_size'
       click_button 'Save'

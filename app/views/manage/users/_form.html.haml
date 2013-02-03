@@ -1,34 +1,49 @@
-= form_for [:manage, @customer], html: {class: 'form-horizontal'} do |user_form|
+= form_for [:manage, @customer]  do |user_form|
+  = error_messages_for @customer
   %fieldset
     %legend User Details
-    = user_form.hidden_field :role, value: 'customer'
-    = user_form.label :first_name, 'First Name'
-    = user_form.text_field :first_name
-    = user_form.label :last_name, 'Last Name'
-    = user_form.text_field :last_name
+    .input-control.text
+      = user_form.hidden_field :role, value: 'customer'
+      = user_form.label :first_name, 'First Name'
+      = user_form.text_field :first_name
+      = user_form.label :last_name, 'Last Name'
+      = user_form.text_field :last_name
     
-    = user_form.fields_for :addresses, html: {class: 'form-horizontal'} do |address_form|
+    = user_form.fields_for :addresses  do |address_form|
       %fieldset
         %legend Address
-        = address_form.text_field :address_1, placeholder: 'Address 1'
-        = address_form.text_field :city, placeholder: 'city'
-        = address_form.text_field :postal_code, placeholder: 'zip'
-        = address_form.select :province, Shipper::STATES
-    = user_form.fields_for :phones, html: {class: 'form-horizontal'} do |phone_form|
+        .input-control.text
+          = address_form.text_field :address_1, placeholder: 'Address 1'
+          = address_form.text_field :city, placeholder: 'city'
+          = address_form.text_field :postal_code, placeholder: 'zip'
+        .input-control.select
+          = address_form.select :province, Shipper::STATES
+    = user_form.fields_for :phones do |phone_form|
       %fieldset
         %legend Phone
-        = phone_form.text_field :number, placeholder: 'Number'
+        .input-control.text
+          = phone_form.text_field :number, placeholder: 'Number'
+  
+    .input-control.text
+      = user_form.label :email, 'Email'
+      = user_form.text_field :email
 
-    = user_form.label :email, 'Email'
-    = user_form.text_field :email
+      = user_form.label :email_confirmation, 'Email Confirmation'
+      = user_form.text_field :email_confirmation
 
-    = user_form.label :email_confirmation, 'Email'
-    = user_form.text_field :email_confirmation
+    .input-control.password
+      = user_form.label :password, 'Password'
+      = user_form.text_field :password
 
-    = user_form.label :anniversary
-    = user_form.text_field :anniversary
+      = user_form.label :password_confirmation, 'Password Confirmation'
+      = user_form.text_field :password_confirmation
 
-    = user_form.label 'Ring Size'
-    = user_form.select :ring_size, User::RING_SIZES
+    .input-control.text
+      = user_form.label :anniversary
+      = user_form.text_field :anniversary
+
+    .input-control.select
+      = user_form.label 'Ring Size'
+      = user_form.select :ring_size, User::RING_SIZES
   .actions
-    = user_form.submit 'Save'
+    = user_form.submit 'Save' 

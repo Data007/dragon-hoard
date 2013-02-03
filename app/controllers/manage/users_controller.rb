@@ -1,4 +1,4 @@
-class Manage::UsersController < ApplicationController
+class Manage::UsersController < ManageController
   before_filter :find_customer, except: [:new, :create, :index]
   
   def new
