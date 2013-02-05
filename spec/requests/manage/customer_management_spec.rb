@@ -25,7 +25,6 @@ describe 'Manage Customers' do
       fill_in 'user_password', with: 'password'
       fill_in 'user_password_confirmation', with: 'password'
       fill_in 'user_anniversary', with: '12/15/12'
-      fill_in 'user_ring_size', with: '13.5'
       click_button 'Save'
 
       User.customers.count.should == 1
