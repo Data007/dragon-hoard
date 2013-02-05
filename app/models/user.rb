@@ -125,7 +125,12 @@ class User
       users += User.where(:first_name.in => variations)
       users += User.where(:last_name.in => variations)
       users += User.where(:name.in => variations)
-      return users.flatten.compact.uniq.sort {|a,b| a.last_name <=> b.last_name}
+      users = users.flatten.compact.uniq
+
+      nil_users      = users.reject {|user| user.last_name}
+      sortable_users = users.select {|user| user.last_name}
+      sortable_users = sortable_users.sort {|a,b| a.last_name <=> b.last_name}
+      return sortable_users + nil_users
     end
   end
   ##
