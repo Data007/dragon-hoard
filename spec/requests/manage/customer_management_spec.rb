@@ -61,8 +61,25 @@ describe 'Manage Customers' do
         current_path.should == edit_manage_customer_path(@customer1)
       end
 
-      it 'updates a finger size'
-      it 'removes a finger size'
+      context 'with a finger' do
+        before do
+          @finger = @customer1.fingers.create name: 'pinky', size: '3'
+          visit edit_manage_customer_path(@customer1)
+        end
+
+        it 'updates a finger size' do
+          within("#finger_#{@customer1.fingers.first.id}") do
+            fill_in 'Name', with: 'middle'
+            fill_in 'Size', with: '12'
+          end
+
+          click_button 'Save'
+
+          @finger.reload
+          @finger.name.should == 'middle'
+          @finger.size.should == '12'
+        end
+      end
     end
 
     it 'views the customers' do
