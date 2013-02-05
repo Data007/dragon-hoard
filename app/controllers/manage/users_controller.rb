@@ -1,10 +1,10 @@
 class Manage::UsersController < ManageController
-  before_filter :find_customer, except: [:new, :create, :index]
+  before_filter :find_customer, except: [:new, :create, :index, :find]
   
   def new
     @customer = User.new
-    @customer.addresses.new
-    @customer.phones.new
+    @customer.addresses.build
+    @customer.phones.build
   end
 
   def create
@@ -13,10 +13,17 @@ class Manage::UsersController < ManageController
   end
   
   def index
-    @customers = User.where(role: 'customer')
+    @customers = User.all.paginate(pagination_hash.merge(order: 'last_name ASC'))
+  end
+
+  def find
+    @customers = User.find_from_query(params[:query])
+    render template: 'manage/users/index'
   end
 
   def edit
+    @customer.addresses.build
+    @customer.phones.build
   end
 
   def update
@@ -31,7 +38,7 @@ class Manage::UsersController < ManageController
 
 private
   def find_customer
-    customer_id = params[:id].present? ? params[:id] : params[:user]
+    customer_id = params[:user_id].present? ? params[:user_id] : params[:id]
     @customer = User.find(customer_id)
   end
 end

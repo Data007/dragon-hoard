@@ -40,3 +40,5 @@ module DragonHoardRails32
 end
 
 Dir[Rails.root.join('lib/**/*.rb')].each {|f| require f}
+
+require 'will_paginate/array'
