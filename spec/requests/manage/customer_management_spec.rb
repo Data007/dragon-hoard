@@ -120,6 +120,7 @@ describe 'Manage Customers' do
         it 'deletes phone numbers' do
           @customer1.phones.count.should == 1
           within("#phone_#{@phone.id}") do
+            soap
             click_link 'Delete'
           end
 
