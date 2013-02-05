@@ -9,6 +9,7 @@ DragonHoardRails32::Application.routes.draw do
 
   namespace :manage do
     resources :customers do
+      resources :fingers, controller: 'customers/fingers'
       collection do
         get :find
       end

@@ -44,5 +44,6 @@
 
     = user_form.label 'Ring Size'
     = user_form.text_field :ring_size
+  = link_to 'Add Ring Size', new_manage_customer_finger_path(@customer)
   .actions
     = user_form.submit 'Save' 

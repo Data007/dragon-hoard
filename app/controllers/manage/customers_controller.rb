@@ -38,7 +38,7 @@ class Manage::CustomersController < ManageController
 
 private
   def find_customer
-    customer_id = params[:user_id].present? ? params[:user_id] : params[:id]
+    customer_id = params[:customer_id].present? ? params[:customer_id] : params[:id]
     @customer = User.find(customer_id)
   end
 end

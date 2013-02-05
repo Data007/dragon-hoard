@@ -1,0 +1,14 @@
+= form_for @finger, url: (@finger.new_record? ? manage_customer_fingers_path(@customer) : manage_customer_finger_path(@customer, @finger)) do |finger_form|
+  = error_messages_for @finger
+
+  %fieldset
+    %legend Finger Details
+    .input-control.text
+      = finger_form.label :name, 'Finger Name'
+      = finger_form.text_field :name
+
+    .input-control.text
+      = finger_form.label :size, 'Finger Size'
+      = finger_form.text_field :size
+    .action
+      = finger_form.submit 'Save'

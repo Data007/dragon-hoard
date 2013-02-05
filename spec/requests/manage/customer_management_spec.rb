@@ -41,11 +41,35 @@ describe 'Manage Customers' do
       click_link 'Customers'
     end
 
+    context 'finger sizes' do
+      before do
+        visit edit_manage_customer_path(@customer1)
+      end
+
+      it 'adds a finger size' do
+        @customer1.fingers.count.should == 0
+
+        click_link 'Add Ring Size'
+        fill_in 'finger_name', with: 'pinky'
+        fill_in 'finger_size', with: '3'
+        click_button 'Save'
+
+        @customer1.fingers.count.should == 1
+        @customer1.fingers.first.name.should == 'pinky'
+        @customer1.fingers.first.size.should == '3'
+
+        current_path.should == edit_manage_customer_path(@customer1)
+      end
+
+      it 'updates a finger size'
+      it 'removes a finger size'
+    end
+
     it 'views the customers' do
       page.should have_content(@customer1.first_name)
       page.should have_content(@customer1.last_name)
       page.should have_content(@customer2.first_name)
-      page.should have_content(@customer1.last_name)
+      page.should have_content(@customer2.last_name)
     end
 
     it 'edits the user' do
