@@ -99,6 +99,25 @@ describe 'Manage Customers' do
 
         current_path.should == edit_manage_customer_path(@customer1)
       end
+
+      context 'with a phone' do
+        before do
+          @phone = @customer1.phones.create number: '1234567890'
+          visit edit_manage_customer_path(@customer1)
+        end
+
+        it 'updates a finger size' do
+          within("#phone_#{@phone.id}") do
+            soap
+            fill_in 'Number', with: '0987654321'
+          end
+
+          click_button 'Save'
+
+          @phone.reload
+          @phone.number.should == '0987654321'
+        end
+      end
     end
 
     it 'views the customers' do

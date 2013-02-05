@@ -24,8 +24,11 @@
   %fieldset
     %legend Phone
     = user_form.fields_for :phones do |phone_form|
-      .input-control.text
-        = phone_form.phone_field :number, placeholder: 'Number'
+      - phone = phone_form.object
+      .phone{id: dom_id(phone)}
+        .input-control.text
+          = phone_form.label :number
+          = phone_form.text_field :number
   
   .input-control.text
     = user_form.label :email, 'Email'
