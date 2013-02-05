@@ -12,9 +12,9 @@ class Address
   embedded_in :user
   embedded_in :order
 
-  validates :address_1, presence: {message: "Address line 1 can't be blank."}
-  validates :city, presence: true
-  validates :postal_code, presence: {message: "Postal Code can't be blank"}
+  #  validates :address_1, presence: {message: "Address line 1 can't be blank."}
+  #  validates :city, presence: true
+  #  validates :postal_code, presence: {message: "Postal Code can't be blank"}
 
   def to_single_line
     address  = "#{address_1}, "

@@ -1,4 +1,4 @@
-= form_for [:manage, @customer]  do |user_form|
+= form_for @customer, url: (@customer.new_record? ? manage_customers_path : manage_customer_path(@customer.id))  do |user_form|
   = error_messages_for @customer
   %fieldset
     %legend User Details
@@ -42,8 +42,7 @@
     = user_form.label :anniversary
     = user_form.text_field :anniversary
 
-  .input-control.select
     = user_form.label 'Ring Size'
-    = user_form.select :ring_size, User::RING_SIZES
+    = user_form.text_field :ring_size
   .actions
     = user_form.submit 'Save' 

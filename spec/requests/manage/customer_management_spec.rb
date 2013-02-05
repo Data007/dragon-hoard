@@ -6,13 +6,13 @@ describe 'Manage Customers' do
   context 'create a user' do
     before do
       visit manage_path
-      click_link 'Users'
+      click_link 'Customers'
     end
 
     it 'creates a user' do
       click_link 'Add a User'
-      current_path.should == new_manage_user_path
-      
+      current_path.should == new_manage_customer_path
+
       fill_in 'user_first_name', with: 'Bryan'
       fill_in 'user_last_name', with: 'Denslow'
       fill_in 'user_addresses_attributes_0_address_1', with: '2235 S 33 1/2 Rd'
@@ -25,21 +25,20 @@ describe 'Manage Customers' do
       fill_in 'user_password', with: 'password'
       fill_in 'user_password_confirmation', with: 'password'
       fill_in 'user_anniversary', with: '12/15/12'
-      select  '6 1/2', from: 'user_ring_size'
+      fill_in 'user_ring_size', with: '13.5'
       click_button 'Save'
 
-      current_path.should == manage_users_path
-
-      User.where(role: 'customer').count.should == 1
+      User.customers.count.should == 1
+      current_path.should == edit_manage_customer_path(User.customers.first)
     end
   end
 
   context 'with a User' do
     before do
-      @customer1 = FactoryGirl.create :user, role: 'customer', first_name: 'bryan'
-      @customer2 = FactoryGirl.create :user, role: 'customer', first_name: 'mike'
+      @customer1 = FactoryGirl.create :user_with_phone_address, role: 'customer', first_name: 'bryan'
+      @customer2 = FactoryGirl.create :user_with_phone_address, role: 'customer', first_name: 'mike'
       visit manage_path 
-      click_link 'Users'
+      click_link 'Customers'
     end
 
     it 'views the customers' do
@@ -50,29 +49,29 @@ describe 'Manage Customers' do
     end
 
     it 'edits the user' do
-      within("##{@customer1.id}") do
+      within("#user_#{@customer1.id}") do
         click_link 'edit'
       end
 
-      current_path.should == edit_manage_user_path(@customer1)
+      current_path.should == edit_manage_customer_path(@customer1)
 
       fill_in "user_first_name", with: 'George'
       fill_in 'user_email', with: 'bryan@hello.com'
       fill_in 'user_email_confirmation', with: 'bryan@hello.com'
 
       click_button 'Save'
-      current_path.should == manage_users_path
+      current_path.should == edit_manage_customer_path(@customer1)
 
       User.where(first_name: 'Bryan').count.should == 0
       User.where(first_name: 'George').count.should == 1
     end
 
     it 'deletes a user' do
-      within("##{@customer1.id}") do
+      within("#user_#{@customer1.id}") do
         click_link 'delete'
       end
 
-      current_path.should == manage_users_path
+      current_path.should == manage_customers_path
       User.where(first_name: 'bryan').count.should == 0
     end
   end

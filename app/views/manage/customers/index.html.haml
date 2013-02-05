@@ -1,8 +1,8 @@
-= form_tag find_manage_users_path, method: :get do
+= form_tag find_manage_customers_path, method: :get do
   = text_field_tag 'query'
   = submit_tag 'find user'
 
-= link_to 'Add a User', [:new, :manage, :user], class: 'button bg-color-green fg-color-white'
+= link_to 'Add a User', [:new, :manage, :customer], class: 'button bg-color-green fg-color-white'
 
 = will_paginate @customers unless @customers.class == Array
 
@@ -20,8 +20,8 @@
         %td= customer.last_name
         %td= customer.email
         %td
-          %a.button.bg-color-green.fg-color-white{href: edit_manage_user_path(customer)}
+          %a.button.bg-color-green.fg-color-white{href: edit_manage_customer_path(customer)}
             edit 
-          = link_to 'delete', manage_user_path(customer), method: :delete, confirm: 'Are you sure you want to delete this user?', class: 'button bg-color-red fg-color-white'
+          = link_to 'delete', manage_customer_path(customer), method: :delete, confirm: 'Are you sure you want to delete this user?', class: 'button bg-color-red fg-color-white'
 
 = will_paginate @customers unless @customers.class == Array

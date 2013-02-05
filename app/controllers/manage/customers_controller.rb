@@ -1,4 +1,4 @@
-class Manage::UsersController < ManageController
+class Manage::CustomersController < ManageController
   before_filter :find_customer, except: [:new, :create, :index, :find]
   
   def new
@@ -9,16 +9,16 @@ class Manage::UsersController < ManageController
 
   def create
     @customer = User.create(params[:user])
-    redirect_to manage_users_path
+    redirect_to edit_manage_customer_path(@customer)
   end
   
   def index
-    @customers = User.all.paginate(pagination_hash.merge(order: 'last_name ASC'))
+    @customers = User.customers.paginate(pagination_hash.merge(order: 'last_name ASC'))
   end
 
   def find
     @customers = User.find_from_query(params[:query])
-    render template: 'manage/users/index'
+    render template: 'manage/customers/index'
   end
 
   def edit
@@ -28,12 +28,12 @@ class Manage::UsersController < ManageController
 
   def update
     @customer.update_attributes params[:user]
-    redirect_to manage_users_path, flash: {notice: "Your changes have been saved"}
+    redirect_to edit_manage_customer_path(@customer), flash: {notice: "Your changes have been saved"}
   end
 
   def destroy
     @customer.destroy
-    redirect_to manage_users_path, flash: {notice: "User has been deleted"}
+    redirect_to manage_customers_path, flash: {notice: "User has been deleted"}
   end
 
 private
