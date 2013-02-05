@@ -18,6 +18,9 @@
         = address_form.text_field :postal_code, placeholder: 'zip'
       .input-control.select
         = address_form.select :province, Shipper::STATES
+
+  - unless @customer.new_record?
+    = link_to 'Add Phone Number', new_manage_customer_phone_path(@customer)
   %fieldset
     %legend Phone
     = user_form.fields_for :phones do |phone_form|
@@ -42,8 +45,6 @@
     = user_form.label :anniversary
     = user_form.text_field :anniversary
 
-    = user_form.label 'Ring Size'
-    = user_form.text_field :ring_size
   - unless @customer.new_record?
     = link_to 'Add Ring Size', new_manage_customer_finger_path(@customer)
     = user_form.fields_for :fingers do |finger_form|

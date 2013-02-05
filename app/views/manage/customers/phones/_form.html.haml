@@ -1,0 +1,11 @@
+= form_for @phone, url: (@phone.new_record? ? manage_customer_phones_path(@customer) : manage_customer_phone_path(@customer, @phone)) do |phone_form|
+  = error_messages_for @phone
+
+  %fieldset
+    %legend Phone Details
+    .input-control.text
+      = phone_form.label :number, 'Phone Number'
+      = phone_form.phone_field :number
+
+    .action
+      = phone_form.submit 'Save'

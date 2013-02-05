@@ -82,6 +82,26 @@ describe 'Manage Customers' do
       end
     end
 
+    context 'it adds phone numbers' do
+      before do
+        visit edit_manage_customer_path(@customer1)
+        @customer1.phones = nil
+      end
+
+      it 'adds a phone number' do
+        @customer1.phones.count.should == 0
+
+        click_link 'Add Phone Number'
+        fill_in 'phone_number', with: '2319204567'
+        click_button 'Save'
+
+        @customer1.phones.count.should == 1
+        @customer1.phones.first.number.should == '2319204567'
+
+        current_path.should == edit_manage_customer_path(@customer1)
+      end
+    end
+
     it 'views the customers' do
       page.should have_content(@customer1.first_name)
       page.should have_content(@customer1.last_name)
