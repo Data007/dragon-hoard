@@ -20,9 +20,11 @@
         = address_form.select :province, Shipper::STATES
   %fieldset
     %legend Phone
-      = user_form.fields_for :phones do |phone_form|
+    = user_form.fields_for :phones do |phone_form|
       .input-control.text
         = phone_form.phone_field :number, placeholder: 'Number'
+    .input-control.text
+      = phone_form.phone_field :number, placeholder: 'Number'
   
   .input-control.text
     = user_form.label :email, 'Email'
