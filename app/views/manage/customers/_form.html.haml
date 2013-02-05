@@ -29,6 +29,7 @@
         .input-control.text
           = phone_form.label :number
           = phone_form.text_field :number
+          = link_to "Delete", manage_customer_phone_path(@customer, phone), method: :delete, confirm: 'Are you sure you want to delete this phone number?'
   
   .input-control.text
     = user_form.label :email, 'Email'

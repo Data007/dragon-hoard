@@ -108,7 +108,6 @@ describe 'Manage Customers' do
 
         it 'updates a finger size' do
           within("#phone_#{@phone.id}") do
-            soap
             fill_in 'Number', with: '0987654321'
           end
 
@@ -116,6 +115,15 @@ describe 'Manage Customers' do
 
           @phone.reload
           @phone.number.should == '0987654321'
+        end
+
+        it 'deletes phone numbers' do
+          @customer1.phones.count.should == 1
+          within("#phone_#{@phone.id}") do
+            click_link 'Delete'
+          end
+
+          @customer1.phones.count.should == 0
         end
       end
     end

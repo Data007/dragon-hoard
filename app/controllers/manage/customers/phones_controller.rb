@@ -8,4 +8,8 @@ class Manage::Customers::PhonesController < Manage::CustomersController
     @customer.phones.create params[:phone]
     redirect_to edit_manage_customer_path(@customer) 
   end
+
+  def destory
+    binding.pry
+  end
 end
