@@ -1,0 +1,22 @@
+= form_for @address, url: (@address.new_record? ? manage_customer_addresses_path(@customer) : manage_customer_address_path(@customer, @address)) do |address_form|
+  = error_messages_for @address
+
+  %fieldset
+    %legend Address Details
+    .input-control.text
+      = address_form.label :address_1, 'Address'
+      = address_form.text_field :address_1
+
+    .input.control.text
+      = address_form.label :city, with: 'City'
+      = address_form.text_field :city
+
+    .input.control.text
+      = address_form.label :postal_code, placeholder: 'Zip'
+      = address_form.text_field :postal_code
+
+    .input.control.select
+      = address_form.select :province, Shipper::STATES
+
+    .action
+      = address_form.submit 'Save' 

@@ -9,15 +9,20 @@
       = user_form.label :last_name, 'Last Name'
       = user_form.text_field :last_name
     
+  - unless @customer.new_record?
+    = link_to 'Add Address', new_manage_customer_address_path(@customer)
   %fieldset
     %legend Addresses
     = user_form.fields_for :addresses  do |address_form|
-      .input-control.text
-        = address_form.text_field :address_1, placeholder: 'Address 1'
-        = address_form.text_field :city, placeholder: 'city'
-        = address_form.text_field :postal_code, placeholder: 'zip'
-      .input-control.select
-        = address_form.select :province, Shipper::STATES
+      - address = address_form.object
+      .address{id: dom_id(address)}
+        .input-control.text
+          = address_form.text_field :address_1, placeholder: 'Address 1'
+          = address_form.text_field :city, placeholder: 'city'
+          = address_form.text_field :postal_code, placeholder: 'zip'
+        .input-control.select
+          = address_form.select :province, Shipper::STATES
+        = link_to 'Delete', manage_customer_address_path(customer_id: @customer.id, id: address.id), method: :delete, confirm: 'Are you sure?'
 
   - unless @customer.new_record?
     = link_to 'Add Phone Number', new_manage_customer_phone_path(@customer)

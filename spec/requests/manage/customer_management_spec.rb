@@ -106,7 +106,7 @@ describe 'Manage Customers' do
           visit edit_manage_customer_path(@customer1)
         end
 
-        it 'updates a finger size' do
+        it 'updates a phone number' do
           within("#phone_#{@phone.id}") do
             fill_in 'Number', with: '0987654321'
           end
@@ -120,11 +120,66 @@ describe 'Manage Customers' do
         it 'deletes phone numbers' do
           @customer1.phones.count.should == 1
           within("#phone_#{@phone.id}") do
-            soap
             click_link 'Delete'
           end
 
           @customer1.phones.count.should == 0
+        end
+      end
+    end
+
+    context 'it adds addresses' do
+      before do
+        visit edit_manage_customer_path(@customer1)
+        @customer1.addresses = nil
+      end
+
+      it 'adds a an address' do
+        @customer1.addresses.count.should == 0
+
+        click_link 'Add Address'
+        fill_in 'address_address_1', with: '1135 W 37 1/2 Rd'
+        fill_in 'address_city', with: 'Cadillac'
+        select  'MI', from: 'address_province' 
+        fill_in 'address_postal_code', with: '49601'
+        click_button 'Save'
+
+        @customer1.reload
+        @customer1.addresses.count.should == 1
+        @customer1.addresses.first.address_1.should == '1135 W 37 1/2 Rd'
+
+        current_path.should == edit_manage_customer_path(@customer1)
+      end
+
+      context 'with a phone' do
+        before do
+          @address = @customer1.addresses.create address_1: '1234 W 37 1/2 Rd' , city: 'Cadillac', postal_code: '49601', province: 'MI'
+          visit edit_manage_customer_path(@customer1)
+        end
+
+        it 'updates a address' do
+          within("#address_#{@address.id}") do
+            fill_in "user_addresses_attributes_0_address_1", with: '2234 S 34 RD'
+            fill_in 'user_addresses_attributes_0_city', with: 'Manton'
+            fill_in 'user_addresses_attributes_0_postal_code', with: '12345'
+          end
+
+          fill_in 'user_email_confirmation', with: "#{@customer1.email}"
+          click_button 'Save'
+
+          @address.reload
+          @address.address_1.should == '2234 S 34 RD'
+          @address.city.should == 'Manton'
+          @address.postal_code.should == '12345'
+        end
+
+        it 'deletes an address' do
+          @customer1.addresses.count.should == 1
+          within("#address_#{@address.id}") do
+            click_link 'Delete'
+          end
+
+          @customer1.addresses.count.should == 0
         end
       end
     end
