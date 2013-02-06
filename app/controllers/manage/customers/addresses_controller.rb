@@ -20,6 +20,6 @@ private
 
   def find_address
     address_id = params[:address_id].present? ? params[:address_id] : params[:id]
-    @address = Address.find(address_id)
+    @address = @customer.addresses.find(address_id)
   end
 end

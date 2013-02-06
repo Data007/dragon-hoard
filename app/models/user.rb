@@ -25,7 +25,7 @@ class User
   sequence :pretty_id
   sequence :pin
 
-  has_many    :addresses
+  embeds_many :addresses
   has_many    :fingers
   has_many    :orders
   has_many    :phones

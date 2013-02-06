@@ -179,6 +179,7 @@ describe 'Manage Customers' do
             click_link 'Delete'
           end
 
+          @customer1.reload
           @customer1.addresses.count.should == 0
         end
       end

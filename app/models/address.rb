@@ -9,7 +9,7 @@ class Address
   field :postal_code
   field :country, :default => 'US'
 
-  belongs_to :user
+  embedded_in :user
   embedded_in :order
 
   #  validates :address_1, presence: {message: "Address line 1 can't be blank."}
