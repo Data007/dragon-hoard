@@ -22,36 +22,6 @@ def normalize_phone user
   end
 end
 
-def normalize_addresses user
-  puts "0.0\nReviewing addresses for #{user.full_name} (##{user.id})"
-  begin
-    user.addresses
-    puts '  - Phone numbers already ported ... Skipping'
-  rescue
-    new_address_list = []
-    user[:old_address] = user[:addresses]
-    unless user[:addresses]
-      puts "No Addresses for the User"
-      return true
-    end
-    user[:addresses].each do |address_string|
-      address_1 = "#{address_string["address_1"]}"
-      puts "  - Found old Address" + address_1
-      print '  - porting old address to new address ... '
-      new_address_list << Address.new(address_1: address_string["address_1"], address_2: address_string["address_2"], city: address_string["city"], province: address_string["province"], postal_code: address_string["postal_code"], country: address_string["country"])
-      puts 'Done'
-    end
-    begin
-      user[:addresses] = []
-    end
-    new_address_list.each do |address|
-      binding.pry
-      user.addresses << address
-    end
-    user.save(validate: false)
-  end
-end
-
 namespace :user do
   namespace :normalize do
     desc 'Normalize and migrate old email format'
@@ -85,13 +55,6 @@ namespace :user do
     task phone: :environment do
       User.all.each do |user|
         normalize_phone user
-      end
-    end
-
-    desc 'Normalize and migrate old address format'
-    task address: :environment do
-      User.all.each do |user|
-        normalize_addresses user
       end
     end
 
