@@ -12,6 +12,14 @@ DragonHoardRails32::Application.routes.draw do
       resources :fingers, controller: 'customers/fingers'
       resources :phones, controller: 'customers/phones'
       resources :addresses, controller: 'customers/addresses'
+      resources :alliances, controller: 'customers/alliances' do
+        collection do
+          get :find
+        end
+        member do
+          get :select
+        end
+      end
       collection do
         get :find
       end

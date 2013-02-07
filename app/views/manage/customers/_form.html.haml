@@ -66,5 +66,10 @@
           = finger_form.label :size
           = finger_form.text_field :size
 
+  - unless @customer.new_record?
+    %fieldset
+      %legend Friends and Family
+      = link_to 'Add a Relationship', find_manage_customer_alliances_path(@customer)
+
   .actions
     = user_form.submit 'Save' 

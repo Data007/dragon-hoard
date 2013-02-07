@@ -31,6 +31,7 @@ class User
   has_many    :phones
   has_many    :credit_cards
   has_many    :api_sessions
+  has_many    :alliances
 
   has_one     :cart
 
@@ -265,4 +266,10 @@ class User
     return (role == 'admin')
   end
   ##
+  
+  def add_alliance ally
+    alliance = self.alliances.create ally_id: ally[:ally_id], relationship: ally[:relationship].downcase
+    User.find(ally[:ally_id]).alliances.create ally_id: self.id
+    return alliance
+  end
 end

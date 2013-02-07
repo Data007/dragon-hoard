@@ -218,5 +218,32 @@ describe 'Manage Customers' do
       current_path.should == manage_customers_path
       User.where(first_name: 'bryan').count.should == 0
     end
+
+    context 'relationships' do
+      it 'adds a friend' do
+        @customer1.alliances.present?.should_not be
+
+        visit edit_manage_customer_path(@customer1)
+        click_link 'Add a Relationship'
+
+        current_path.should == find_manage_customer_alliances_path(@customer1)
+        fill_in 'query', with: @customer2.first_name
+        click_button 'Search'
+
+        current_path.should == new_manage_customer_alliance_path(@customer1)
+        click_link 'link user'
+
+        current_path.should == select_manage_customer_alliance_path(@customer1, @customer2)
+        select 'Friend', from: 'alliance_relationship'
+        click_button 'Save'
+
+        current_path.should == edit_manage_customer_path(@customer1)
+        @customer1.reload
+        @customer1.alliances.present?.should be
+        @customer1.alliances.friends.map(&:ally).should include(@customer2)
+      end
+
+      it 'removes a friend'
+    end
   end
 end

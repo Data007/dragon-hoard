@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th &nbsp;
+  %tbody
+    - @users.each do |user|
+      %tr{id: dom_id(user)}
+        %td= user.first_name
+        %td= user.last_name
+        %td= link_to 'link user', select_manage_customer_alliance_path(@customer, user)
