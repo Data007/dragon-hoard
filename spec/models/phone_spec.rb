@@ -11,14 +11,6 @@ describe Phone do
       @phone.update_attributes!(number: '2319203456')
       @phone.reload.number.should == '2319203456'
 
-      ->{@phone.update_attributes!(number: '23')}.should raise_error(Mongoid::Errors::Validations)
-      @phone.reload
-      @phone.number.should == '2319203456'
-
-      ->{@phone.update_attributes!(number: '23192088776')}.should raise_error(Mongoid::Errors::Validations)
-      @phone.reload
-      @phone.number.should == '2319203456'
-
       @phone.update_attributes!(number: '(231)884-3024')
       @phone.reload
       @phone.number.should == '(231)884-3024'

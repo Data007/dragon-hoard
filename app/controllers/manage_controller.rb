@@ -15,6 +15,7 @@ private
 
   def force_pin
     unless manage_user
+      ## Demo setting only
       session[:manage_user_id] = User.first.id
       ## Commented out for the sake of demoing
       # session[:redirect_to] = request.fullpath
