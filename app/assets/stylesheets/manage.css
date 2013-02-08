@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require jquery.ui.all
+ *= require ./grid
  *= require_tree ./manage/
  *= require ./manage/page-region-fix
  */

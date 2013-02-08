@@ -41,13 +41,13 @@
         .page-region-content
           - if flash.present?
             - flash.each do |(key, value)|
-              .notices
+              .notices.grid-whole
                 - bgcolor = (key == :error) ? 'red' : 'green'
                 - hgcolor = (key == :error) ? 'yellow' : 'black'
                 %div{class: "bg-color-#{bgcolor}"}
-                  .notice-header{class: "fg-color-#{hgcolor}"}
-                    An error has occurred
-                  .notice-text
+                  .notice-header.grid-whole{class: "fg-color-#{hgcolor}"}
+                    = key.to_s.titleize
+                  .notice-text.grid-whole
                     = raw(value)
 
-          = yield
+          .grid-whole= yield
