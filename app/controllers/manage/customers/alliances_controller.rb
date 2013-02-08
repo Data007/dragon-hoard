@@ -1,5 +1,6 @@
 class Manage::Customers::AlliancesController < Manage::CustomersController
   before_filter :find_customer
+  before_filter :find_alliance, only: [:destroy]
 
   def find
   end
@@ -15,5 +16,16 @@ class Manage::Customers::AlliancesController < Manage::CustomersController
   def create
     @customer.add_alliance(params[:alliance])
     redirect_to edit_manage_customer_path(@customer)
+  end
+
+  def destroy
+    @alliance.destroy
+    redirect_to edit_manage_customer_path(@customer)
+  end
+
+private
+  def find_alliance
+    alliance_id = params[:alliance_id].present? ? params[:alliance_id] : params[:id]
+    @alliance = @customer.alliances.find(alliance_id)
   end
 end

@@ -22,7 +22,7 @@
           = address_form.text_field :postal_code, placeholder: 'zip'
         .input-control.select
           = address_form.select :province, Shipper::STATES
-        = link_to 'Delete', manage_customer_address_path(customer_id: @customer.id, id: address.id), method: :delete, confirm: 'Are you sure?'
+        = link_to 'Delete', manage_customer_address_path(customer_id: @customer.id, id: address.id), method: :delete, confirm: "Remove #{address.to_single_line} from #{@customer.full_name}?"
 
   - unless @customer.new_record?
     = link_to 'Add Phone Number', new_manage_customer_phone_path(@customer)
@@ -34,7 +34,7 @@
         .input-control.text
           = phone_form.label :number
           = phone_form.text_field :number
-        = link_to 'Delete', manage_customer_phone_path(customer_id: @customer.id, id: phone.id), method: :delete, confirm: 'Are you sure?'
+        = link_to 'Delete', manage_customer_phone_path(customer_id: @customer.id, id: phone.id), method: :delete, confirm: "Remove #{phone.number} from #{@customer.full_name}?"
   
   .input-control.text
     = user_form.label :email, 'Email'
@@ -70,6 +70,18 @@
     %fieldset
       %legend Friends and Family
       = link_to 'Add a Relationship', find_manage_customer_alliances_path(@customer)
+
+      %table.alliances
+        %thead
+          %th Name
+          %th Relationship
+          %th &nbsp;
+        %tbody
+          - @customer.alliances.each do |alliance|
+            %tr.alliance{id: dom_id(alliance)}
+              %td= alliance.ally.full_name
+              %td= alliance.relationship
+              %td= link_to 'Delete', manage_customer_alliance_path(customer_id: @customer.id, id: alliance.id), method: :delete, confirm: "Remove #{alliance.ally.full_name} from the Friends and Family for #{@customer.full_name}?"
 
   .actions
     = user_form.submit 'Save' 

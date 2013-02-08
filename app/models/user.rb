@@ -35,7 +35,7 @@ class User
 
   has_one     :cart
 
-  accepts_nested_attributes_for :addresses, :phones, :fingers
+  accepts_nested_attributes_for :addresses, :phones, :fingers, :alliances
 
   attr_accessor :password, :password_confirmation, :new_password, :old_password, :email_confirmation
 

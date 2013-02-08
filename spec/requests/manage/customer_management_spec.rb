@@ -238,12 +238,42 @@ describe 'Manage Customers' do
         click_button 'Save'
 
         current_path.should == edit_manage_customer_path(@customer1)
+        page.should have_content(@customer2.full_name)
         @customer1.reload
         @customer1.alliances.present?.should be
         @customer1.alliances.friends.map(&:ally).should include(@customer2)
       end
 
-      it 'removes a friend'
+      it 'removes a friend' do
+        alliance = @customer1.add_alliance({ally_id: @customer2.id, relationship: 'friend'})
+        @customer1.reload
+        @customer1.alliances.friends.map(&:ally).should include(@customer2)
+
+        visit edit_manage_customer_path(@customer1)
+        page.should have_content(@customer2.full_name)
+        within('.alliances') do
+          click_link 'Delete'
+        end
+
+        current_path.should == edit_manage_customer_path(@customer1)
+        page.should_not have_content(@customer2.full_name)
+        @customer1.alliances.friends.map(&:ally).should_not include(@customer2)
+      end
+
+      it 'edits a relationship' do
+        pending 'demo'
+        # alliance = @customer1.add_alliance({ally_id: @customer2.id, relationship: 'friend'})
+        # @customer1.reload
+        # 
+        # visit edit_manage_customer_path(@customer1)
+        # within('.alliances') do
+        #   select 'Parent', from: 'customer_alliance_relationship'
+        # end
+        # click_button 'Save'
+
+        # alliance.reload
+        # alliance.relationship.should == 'parent'
+      end
     end
   end
 end
