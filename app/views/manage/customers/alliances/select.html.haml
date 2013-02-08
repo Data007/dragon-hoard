@@ -1,5 +1,5 @@
 = form_for @ally, url: manage_customer_alliances_path(@customer) do |ally_form|
   = ally_form.hidden_field :ally_id, value: @ally.ally_id
-  = ally_form.select :relationship, options_for_select(Alliance::ALLIANCES.map {|a| a.capitalize})
+  = ally_form.select :relationship, options_for_select(Alliance::ALLIANCES)
   .action
     = ally_form.submit 'Save'

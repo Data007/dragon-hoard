@@ -234,7 +234,7 @@ describe 'Manage Customers' do
         click_link 'link user'
 
         current_path.should == select_manage_customer_alliance_path(@customer1, @customer2)
-        select 'Friend', from: 'alliance_relationship'
+        select 'friend', from: 'alliance_relationship'
         click_button 'Save'
 
         current_path.should == edit_manage_customer_path(@customer1)
@@ -265,14 +265,13 @@ describe 'Manage Customers' do
          @customer1.reload
          
          visit edit_manage_customer_path(@customer1)
-         soap
          within('.alliances') do
-           select 'Parent', from: 'customer_alliance_relationship'
+           select 'father', from: 'user_alliances_attributes_0_relationship'
          end
          click_button 'Save'
 
          alliance.reload
-         alliance.relationship.should == 'parent'
+         alliance.relationship.should == 'father'
       end
     end
   end

@@ -21,11 +21,6 @@ class Manage::CustomersController < ManageController
     render template: 'manage/customers/index'
   end
 
-  def edit
-    @customer.addresses.build
-    @customer.phones.build
-  end
-
   def update
     @customer.update_attributes params[:user]
     redirect_to edit_manage_customer_path(@customer), flash: {notice: "Your changes have been saved"}

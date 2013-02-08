@@ -3,11 +3,11 @@ class Alliance
   include Mongoid::Timestamps
 
   field :ally_id
-  field :relationship, default: 'friend'
+  field :relationship, default: 'other'
 
   belongs_to :user
 
-  ALLIANCES = %w(spouse grandparent parent child aunt uncle cousin nephew niece friend fiance sister brother sibling)
+  ALLIANCES = %w(spouse grandmother grandfather mother father son daughter aunt uncle cousin nephew niece friend fiance sister brother sibling other)
 
   scope :friends, where(relationship: 'friend')
 
