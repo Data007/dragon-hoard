@@ -32,5 +32,21 @@ describe User do
       @user.reload
       @user.email.should == 'bryan@deewoodsbigade.com'
     end
+
+    context '#add_alliance' do
+      before do
+        @user = FactoryGirl.create :user_with_phone_address, gender: 'male'
+        @user_ally = FactoryGirl.create :user_with_phone_address, gender: 'male'
+
+        @user.add_alliance({ally_id: @user_ally.id, relationship: 'nephew'})
+        @user.reload
+        @user_ally.reload
+        @user_alliance = @user.alliances.first
+        @ally_alliance = @user_ally.alliances.first
+      end
+      
+      it{@user_alliance.relationship.should == 'nephew'}
+      it{@ally_alliance.relationship.should == 'uncle'}
+    end
   end
 end

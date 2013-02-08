@@ -11,6 +11,7 @@ class User
   field :password_hash
   field :is_active,    type: Boolean, default: false
   field :role,                        default: 'public'
+  field :gender,                      default: 'male'
   field :name
   field :first_name
   field :last_name
@@ -24,6 +25,8 @@ class User
   field :pin,          type: Integer
   sequence :pretty_id
   sequence :pin
+
+  GENDERS = %w(male female)
 
   embeds_many :addresses
   has_many    :fingers
@@ -268,8 +271,15 @@ class User
   ##
   
   def add_alliance ally
-    alliance = self.alliances.create ally_id: ally[:ally_id], relationship: ally[:relationship].downcase
-    User.find(ally[:ally_id]).alliances.create ally_id: self.id
+    alliance = self.alliances.create ally
+
+    User.find(ally[:ally_id]).alliances.create(
+      ally_id: self.id,
+      relationship: Alliance.find_opposite_relationship(
+        ally[:relationship],
+        gender
+      )
+    )
     return alliance
   end
 end
