@@ -261,18 +261,18 @@ describe 'Manage Customers' do
       end
 
       it 'edits a relationship' do
-        pending 'demo'
-        # alliance = @customer1.add_alliance({ally_id: @customer2.id, relationship: 'friend'})
-        # @customer1.reload
-        # 
-        # visit edit_manage_customer_path(@customer1)
-        # within('.alliances') do
-        #   select 'Parent', from: 'customer_alliance_relationship'
-        # end
-        # click_button 'Save'
+         alliance = @customer1.add_alliance({ally_id: @customer2.id, relationship: 'friend'})
+         @customer1.reload
+         
+         visit edit_manage_customer_path(@customer1)
+         soap
+         within('.alliances') do
+           select 'Parent', from: 'customer_alliance_relationship'
+         end
+         click_button 'Save'
 
-        # alliance.reload
-        # alliance.relationship.should == 'parent'
+         alliance.reload
+         alliance.relationship.should == 'parent'
       end
     end
   end

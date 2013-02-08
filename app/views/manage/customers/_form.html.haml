@@ -71,6 +71,17 @@
       %legend Friends and Family
       = link_to 'Add a Relationship', find_manage_customer_alliances_path(@customer)
 
+    = user_form.fields_for :alliances do |alliance_form|
+      - alliance = alliance_form.object
+      .alliance{id: dom_id(alliance)}
+        .input-control.text
+          = alliance_form.label :first_name
+          = alliance_form.text_field :first_name
+        .input-control.text
+          = alliance_form.label :last_name
+          = alliance_form.text_field :last_name
+        .input-control.select
+          = alliance_form.select :relationship, options_for_select(Alliance::ALLIANCES)
       %table.alliances
         %thead
           %th Name
@@ -81,6 +92,7 @@
             %tr.alliance{id: dom_id(alliance)}
               %td= alliance.ally.full_name
               %td= alliance.relationship
+              %td= cart_form.select :shipping_type, options_for_select(shipping_options_for_select(@cart.shipping_options))
               %td= link_to 'Delete', manage_customer_alliance_path(customer_id: @customer.id, id: alliance.id), method: :delete, confirm: "Remove #{alliance.ally.full_name} from the Friends and Family for #{@customer.full_name}?"
 
   .actions
