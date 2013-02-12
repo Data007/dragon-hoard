@@ -15,7 +15,7 @@ describe 'Managing Sales' do
       end
 
       it 'rejects invalid pins' do
-        fill_in 'Employee ID', with: '3242535'
+        fill_in 'employee-id', with: '3242535'
         click_button 'Enter'
 
         page.should have_content('Unauthorized')
@@ -23,13 +23,12 @@ describe 'Managing Sales' do
 
       context 'with a valid pin' do
         before do
-          fill_in 'Employee ID', with: employee.pin
+          fill_in 'employee-id', with: employee.pin
           click_button 'Enter'
         end
 
-        it 'creates a sale' do 
-          current_path.should == edit_manage_sale_path(Order.first)
-          page.should have_content("Order #{Order.first.pretty_id}")
+        it 'lands on find a user path' do 
+          current_path.should == new_manage_order_user_path(Order.first)
         end
       end
     end

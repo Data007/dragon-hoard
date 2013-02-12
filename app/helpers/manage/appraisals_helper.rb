@@ -1,0 +1,2 @@
+module Manage::AppraisalsHelper
+end

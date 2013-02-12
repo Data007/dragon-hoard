@@ -22,10 +22,4 @@ private
     id = params[:sale_id] ? params[:sale_id] : params[:id]
     @order = Order.find(id)
   end
-
-  def force_order_has_user
-    unless @order.user
-      redirect_to [:new, :manage, @order, :user]
-    end
-  end
 end

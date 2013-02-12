@@ -4,6 +4,5 @@
 
 = form_tag [:manage, :session] do
   .input-control.text
-    %input(type='text' name='user[pin]' placeholder='Employeed Id')
-    %button.helper
+    %input(id='employee-id' type='text' name='user[pin]' placeholder='Employeed Id')
   = submit_tag 'Enter'

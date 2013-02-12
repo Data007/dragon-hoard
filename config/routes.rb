@@ -35,6 +35,8 @@ DragonHoardRails32::Application.routes.draw do
       end
     end
 
+    resources :appraisals
+
     resources :sales do
       member do
         get :checkout
