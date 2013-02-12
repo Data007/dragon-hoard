@@ -17,7 +17,6 @@ describe 'Manage Sales' do
 
         page.should have_content(@user.full_name)
 
-        soap
         click_link @user.full_name
 
         current_path.should == edit_manage_sale_path(Order.first)

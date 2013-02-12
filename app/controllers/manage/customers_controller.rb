@@ -22,8 +22,12 @@ class Manage::CustomersController < ManageController
   end
 
   def update
-    @customer.update_attributes params[:user]
-    redirect_to edit_manage_customer_path(@customer), flash: {notice: "Your changes have been saved"}
+    if @customer.update_attributes params[:user]
+      redirect_to edit_manage_customer_path(@customer), flash: {notice: "Your changes have been saved"}
+    else
+      flash[:error] = 'There was a problem updating the customer'
+      render template: 'manage/customers/edit'
+    end
   end
 
   def destroy
